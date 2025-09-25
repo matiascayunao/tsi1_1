@@ -12,6 +12,7 @@ class AgendaMedico extends Model
     protected $table = 'AgendasMedicos';
     public $incrementing = false;
     public $timestamps = false;
+    
 
     protected $fillable = [
         'rutMedico',

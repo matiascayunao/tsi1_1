@@ -53,6 +53,9 @@ Route::get('/previsiones/{prevision}', [PrevisionesController::class, 'show'])->
 Route::get('/citas', [CitasPacientesController::class, 'index'])->name('citas.index');
 Route::post('/citas/buscar', [CitasPacientesController::class, 'buscar'])->name('citas.buscar');
 
+Route::get('/citas/registrar-paciente', [CitasPacientesController::class, 'registrarPaciente'])->name('citas.registrarPaciente');
+Route::post('/citas/guardar-paciente', [CitasPacientesController::class, 'guardarPaciente'])->name('citas.guardarPaciente');
+
 Route::get('/citas/reservar', [CitasPacientesController::class, 'create'])->name('citas.create');
 Route::post('/citas/reservar', [CitasPacientesController::class, 'store'])->name('citas.store');
 Route::get('/citas/{cita}/edit', [CitasPacientesController::class, 'edit'])->name('citas.edit');

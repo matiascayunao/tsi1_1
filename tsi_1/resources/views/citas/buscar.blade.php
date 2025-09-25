@@ -22,7 +22,7 @@
                         <p class="mb-0">Teléfono: {{ $medico->telefonoMedico }}</p>
                     </div>
                     {{-- Pasamos rutMedico como parámetro --}}
-                    <a href="{{ route('citas.create', ['rutMedico' => $medico->rutMedico]) }}" class="btn btn-primary">
+                    <a href="{{ route('citas.registrarPaciente', ['rutMedico' => $medico->rutMedico, 'idPrevision' => $prevision->codPrevision]) }}" class="btn btn-primary">
                         Seleccionar
                     </a>
                 </div>

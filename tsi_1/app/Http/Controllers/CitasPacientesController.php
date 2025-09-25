@@ -13,6 +13,7 @@ use App\Models\Especialidad;
 
 
 
+
 class CitasPacientesController extends Controller
 {
     /**
@@ -29,12 +30,16 @@ class CitasPacientesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $pacientes = Paciente::all();
-        $medicos = Medico::all();
-        return view('citas.create', compact('pacientes','medicos'));
-    }
+public function create(Request $request)
+{
+    $pacientes = Paciente::orderBy('nombre')->get();
+    $medicos   = Medico::with('especialidad')->orderBy('nombreMedico')->get();
+
+    $rutPaciente = $request->query('rutPaciente', session('rutPacienteSel'));
+    $rutMedico   = $request->query('rutMedico', session('rutMedicoSel'));
+
+    return view('citas.create', compact('pacientes', 'medicos', 'rutPaciente', 'rutMedico'));
+}
 
     /**
      * Store a newly created resource in storage.
@@ -48,14 +53,15 @@ class CitasPacientesController extends Controller
         'motivoCita'  => 'required|string|max:255',
     ]);
 
-    CitaPaciente::create([
+    $cita = CitaPaciente::create([
         'rutPaciente' => $request->rutPaciente,
         'rutMedico'   => $request->rutMedico,
         'fechaHora'   => $request->fechaHora,
         'motivoCita'  => $request->motivoCita,
     ]);
 
-    return redirect()->route('citas.index')->with('success', 'Cita agendada correctamente');
+     return redirect()->route('citas.show', $cita->idCita)
+                     ->with('success', 'Cita agendada correctamente');
 }
 
     /**
@@ -120,6 +126,50 @@ class CitasPacientesController extends Controller
     $medicos = Medico::where('idEspecialidad', $idEspecialidad)->get();
 
     return view('citas.buscar', compact('medicos', 'prevision', 'especialidad'));
+    }
+
+    public function registrarPaciente(Request $request)
+    {
+        $rutMedico = $request->rutMedico;
+        $idPrevision = $request->idPrevision;
+
+        $prevision = Prevision::find($idPrevision);
+        $medico = Medico::where('rutMedico', $rutMedico)->first();
+
+        return view('citas.registrar-paciente', compact('rutMedico', 'idPrevision', 'prevision', 'medico'));
+    }
+
+    public function guardarPaciente(Request $request)
+    {
+    // (opcional) validación rápida
+    $request->validate([
+        'rutPaciente'      => 'required|string|max:12|unique:pacientes,rutPaciente',
+        'nombre'           => 'required|string|max:100',
+        'fechaNacimiento'  => 'required|date',
+        'correo'           => 'required|email',
+        'telefono'         => 'required|string|max:15',
+        'idPrevision'      => 'required|exists:previsiones,codPrevision',
+        'rutMedico'        => 'required|string|max:12',
+    ]);
+
+    Paciente::create([
+        'rutPaciente'     => $request->rutPaciente,
+        'nombre'          => $request->nombre,
+        'fechaNacimiento' => $request->fechaNacimiento,
+        'correo'          => $request->correo,
+        'telefono'        => $request->telefono,
+        'codPrevision'    => $request->idPrevision,
+    ]);
+
+    return redirect()
+        ->route('citas.create', [
+            'rutMedico'   => $request->rutMedico,
+            'rutPaciente' => $request->rutPaciente,
+        ])
+        ->with([
+            'rutPacienteSel' => $request->rutPaciente,
+            'rutMedicoSel'   => $request->rutMedico,
+        ]);
     }
 
 }

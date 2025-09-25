@@ -12,6 +12,7 @@ class ResumenCita extends Model
     protected $table = 'ResumenesCitas';
     protected $primaryKey = 'idCita';
     public $incrementing = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'idCita',

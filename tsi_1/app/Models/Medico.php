@@ -13,6 +13,7 @@ class Medico extends Model
     protected $primaryKey = 'rutMedico';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 
     protected $fillable = [
         'rutMedico',

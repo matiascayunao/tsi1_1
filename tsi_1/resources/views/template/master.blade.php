@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item"><a class="nav-link" href="#">Información para Pacientes</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Médicos y Especialistas</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('citas.index') }}">Médicos y Especialistas</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Modificar Cita</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Cancelar Cita</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Sobre Nosotros</a></li>

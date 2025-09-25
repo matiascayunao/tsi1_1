@@ -12,6 +12,7 @@ class Prevision extends Model
 
     protected $table = 'Previsiones';
     protected $primaryKey = 'codPrevision';
+    public $timestamps = false;
 
     protected $fillable = [
         'codPrevision',
