@@ -9,14 +9,16 @@ class CitaPaciente extends Model
 {
     use HasFactory;
 
-    protected $table = 'CitaPaciente';
-    protected $primaryKey = 'idCita';
+    protected $table = 'citas_pacientes';   // nombre de la tabla
+    protected $primaryKey = 'idCita';       // clave primaria
 
+    public $timestamps = false;          // si no tienes timestamps
+    // 🔹 Esto es lo que falta (o está mal escrito en tu código)
     protected $fillable = [
         'rutPaciente',
         'rutMedico',
         'fechaHora',
-        'motivoCita'
+        'motivoCita',
     ];
 
     public function paciente()

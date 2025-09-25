@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Prevision extends Model
 {
     use HasFactory;
 
-    protected $table = 'Prevision';
+    protected $table = 'Previsiones';
     protected $primaryKey = 'codPrevision';
 
     protected $fillable = [

@@ -7,6 +7,11 @@ use App\Models\Paciente;
 use App\Models\Medico;
 use Illuminate\Http\Request;
 use App\Http\Requests\CitaRequest;
+use App\Models\Prevision;
+use App\Models\Especialidad;
+
+
+
 
 class CitasPacientesController extends Controller
 {
@@ -15,8 +20,10 @@ class CitasPacientesController extends Controller
      */
     public function index()
     {
-        $citas = CitaPaciente::with(['paciente','medico'])->get();
-        return view('citas.index', compact('citas'));
+        $previsiones = Prevision::all();
+        $especialidades = Especialidad::all();
+
+        return view('citas.index', compact('previsiones', 'especialidades'));
     }
 
     /**
@@ -32,17 +39,24 @@ class CitasPacientesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CitaRequest $request)
-    {
-        $cita = new CitaPaciente();
-        $cita->rutPaciente = $request->rutPaciente;
-        $cita->rutMedico = $request->rutMedico;
-        $cita->fechaHora = $request->fechaHora;
-        $cita->motivoCita = $request->motivoCita;
-        $cita->save();
+    public function store(Request $request)
+{
+    $request->validate([
+        'rutPaciente' => 'required|string|max:12',
+        'rutMedico'   => 'required|string|max:12',
+        'fechaHora'   => 'required|date',
+        'motivoCita'  => 'required|string|max:255',
+    ]);
 
-        return redirect()->route('citas.index');
-    }
+    CitaPaciente::create([
+        'rutPaciente' => $request->rutPaciente,
+        'rutMedico'   => $request->rutMedico,
+        'fechaHora'   => $request->fechaHora,
+        'motivoCita'  => $request->motivoCita,
+    ]);
+
+    return redirect()->route('citas.index')->with('success', 'Cita agendada correctamente');
+}
 
     /**
      * Display the specified resource.
@@ -65,15 +79,22 @@ class CitasPacientesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CitaRequest $request, CitaPaciente $cita)
+    public function update(Request $request, CitaPaciente $cita)
     {
-        $cita->rutPaciente = $request->rutPaciente;
-        $cita->rutMedico = $request->rutMedico;
-        $cita->fechaHora = $request->fechaHora;
-        $cita->motivoCita = $request->motivoCita;
-        $cita->save();
+    $request->validate([
+        'rutPaciente' => 'required|string|max:12',
+        'rutMedico'   => 'required|string|max:12',
+        'fechaHora'   => 'required|date',
+        'motivoCita'  => 'required|string|max:255',
+    ]);
 
-        return redirect()->route('citas.index');
+    $cita->rutPaciente = $request->rutPaciente;
+    $cita->rutMedico = $request->rutMedico;
+    $cita->fechaHora = $request->fechaHora;
+    $cita->motivoCita = $request->motivoCita;
+    $cita->save();
+
+    return redirect()->route('citas.index')->with('success', 'Cita actualizada correctamente');
     }
 
     /**
@@ -84,4 +105,22 @@ class CitasPacientesController extends Controller
         $cita->delete();
         return redirect()->route('citas.index');
     }
+    public function buscar(Request $request)
+    {
+
+    // Guardamos la selección del paciente
+    $codPrevision = $request->codPrevision;
+    $idEspecialidad = $request->idEspecialidad;
+
+    // Obtenemos la previsión y especialidad para mostrar en la vista
+    $prevision = Prevision::find($codPrevision);
+    $especialidad = Especialidad::find($idEspecialidad);
+
+    // Filtramos médicos que pertenezcan a la especialidad seleccionada
+    $medicos = Medico::where('idEspecialidad', $idEspecialidad)->get();
+
+    return view('citas.buscar', compact('medicos', 'prevision', 'especialidad'));
+    }
+
 }
+

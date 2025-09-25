@@ -1,13 +1,7 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Centro Médico BioSalud</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  </body>
-</html>
+@extends('template.master')
+
+@section('contenido')
+    <h1>Bienvenido al Centro Médico BioSalud</h1>
+    <p>En nuestra clínica, nos preocupamos por tu salud y bienestar. Ofrecemos una amplia gama de servicios médicos para atender tus necesidades.</p>
+    <p>Explora nuestro sitio para obtener más información sobre nuestros médicos, especialidades y cómo reservar una cita.</p>
+@endsection

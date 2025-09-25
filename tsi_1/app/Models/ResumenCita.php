@@ -9,7 +9,7 @@ class ResumenCita extends Model
 {
     use HasFactory;
 
-    protected $table = 'ResumenCita';
+    protected $table = 'ResumenesCitas';
     protected $primaryKey = 'idCita';
     public $incrementing = false;
 

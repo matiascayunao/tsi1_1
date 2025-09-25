@@ -9,7 +9,7 @@ class AgendaMedico extends Model
 {
     use HasFactory;
 
-    protected $table = 'AgendaMedico';
+    protected $table = 'AgendasMedicos';
     public $incrementing = false;
     public $timestamps = false;
 
