@@ -86,22 +86,22 @@ public function create(Request $request)
      * Update the specified resource in storage.
      */
     public function update(Request $request, CitaPaciente $cita)
-    {
+{
     $request->validate([
-        'rutPaciente' => 'required|string|max:12',
-        'rutMedico'   => 'required|string|max:12',
         'fechaHora'   => 'required|date',
-        'motivoCita'  => 'required|string|max:255',
     ]);
 
-    $cita->rutPaciente = $request->rutPaciente;
-    $cita->rutMedico = $request->rutMedico;
     $cita->fechaHora = $request->fechaHora;
-    $cita->motivoCita = $request->motivoCita;
+
+    // Si quieres permitir editar el motivo, descomenta:
+    // $cita->motivoCita = $request->motivoCita;
+
     $cita->save();
 
-    return redirect()->route('citas.index')->with('success', 'Cita actualizada correctamente');
-    }
+    return redirect()->route('citas.show', $cita->idCita)
+                     ->with('success', 'La cita se actualizó correctamente');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -172,5 +172,20 @@ public function create(Request $request)
         ]);
     }
 
-}
+    public function buscarPorRut()
+    {
+        return view('citas.buscar-rut');
+    }
 
+    public function mostrarCitaActu(Request $request)
+    {
+    $rutPaciente = $request->rutPaciente;
+
+    $citas = CitaPaciente::with(['medico', 'paciente'])
+            ->where('rutPaciente', $rutPaciente)
+            ->get();
+
+    return view('citas.listar-citas', compact('citas', 'rutPaciente'));
+    }
+
+}
