@@ -15,23 +15,23 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // Validación básica
+        
         $credenciales = $request->validate([
             'rut' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        // Intento de login
+        
         $ok = Auth::attempt([
             'rut' => $credenciales['rut'],
             'password' => $credenciales['password'],
-        ], false); // false = sin "remember me"
+        ], false); 
 
-        // Log de diagnóstico (mira storage/logs/laravel.log si algo falla)
+        
         Log::info('Intento login', ['rut' => $credenciales['rut'], 'ok' => $ok]);
 
         if ($ok) {
-            $request->session()->regenerate(); // MUY IMPORTANTE
+            $request->session()->regenerate(); 
             return redirect()->intended(route('home.index'))
                    ->with('success', 'Sesión iniciada como ' . Auth::user()->rol);
         }

@@ -30,8 +30,8 @@ class CitasPacientesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-public function create(Request $request)
-{
+    public function create(Request $request)
+    {
     $pacientes = Paciente::orderBy('nombre')->get();
     $medicos   = Medico::with('especialidad')->orderBy('nombreMedico')->get();
 
@@ -39,13 +39,13 @@ public function create(Request $request)
     $rutMedico   = $request->query('rutMedico', session('rutMedicoSel'));
 
     return view('citas.create', compact('pacientes', 'medicos', 'rutPaciente', 'rutMedico'));
-}
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
+    {
     $request->validate([
         'rutPaciente' => 'required|string|max:12',
         'rutMedico'   => 'required|string|max:12',
@@ -62,7 +62,7 @@ public function create(Request $request)
 
      return redirect()->route('citas.show', $cita->idCita)
                      ->with('success', 'Cita agendada correctamente');
-}
+    }
 
     /**
      * Display the specified resource.
@@ -86,7 +86,7 @@ public function create(Request $request)
      * Update the specified resource in storage.
      */
     public function update(Request $request, CitaPaciente $cita)
-{
+    {
     $request->validate([
         'fechaHora'   => 'required|date',
     ]);
@@ -98,44 +98,46 @@ public function create(Request $request)
 
     $cita->save();
 
-    return redirect()->route('citas.show', $cita->idCita)
-                     ->with('success', 'La cita se actualizó correctamente');
-}
+    return redirect()->route('citas.show', $cita->idCita);
+                     
+    }
 
 
     /**
      * Remove the specified resource from storage.
      */
-   public function destroy(CitaPaciente $cita, Request $request)
-{
-    $rut = $cita->rutPaciente;
-    $cita->delete();
+    public function destroy(CitaPaciente $cita, Request $request)
+    {
+        $rut = $cita->rutPaciente;
+        $cita->delete();
 
-    $citas = CitaPaciente::with(['medico', 'paciente'])
+        $citas = CitaPaciente::with(['medico', 'paciente'])
                 ->where('rutPaciente', $rut)
                 ->get();
 
-    return view('citas.listar-cancelar', [
-    'citas' => $citas,
-    'rutPaciente' => $rut
-])->with('success', 'La cita fue cancelada correctamente.');
-}
+        return view('citas.listar-cancelar', ['citas' => $citas,'rutPaciente' => $rut]);
+    }
+
+
+
     public function buscar(Request $request)
     {
 
-    // Guardamos la selección del paciente
+    
     $codPrevision = $request->codPrevision;
     $idEspecialidad = $request->idEspecialidad;
 
-    // Obtenemos la previsión y especialidad para mostrar en la vista
+    
     $prevision = Prevision::find($codPrevision);
     $especialidad = Especialidad::find($idEspecialidad);
 
-    // Filtramos médicos que pertenezcan a la especialidad seleccionada
+    
     $medicos = Medico::where('idEspecialidad', $idEspecialidad)->get();
 
     return view('citas.buscar', compact('medicos', 'prevision', 'especialidad'));
     }
+
+
 
     public function registrarPaciente(Request $request)
     {
@@ -148,9 +150,12 @@ public function create(Request $request)
         return view('citas.registrar-paciente', compact('rutMedico', 'idPrevision', 'prevision', 'medico'));
     }
 
+
+
+
     public function guardarPaciente(Request $request)
     {
-    // (opcional) validación rápida
+    
     $request->validate([
         'rutPaciente'      => 'required|string|max:12|unique:pacientes,rutPaciente',
         'nombre'           => 'required|string|max:100',
@@ -181,10 +186,15 @@ public function create(Request $request)
         ]);
     }
 
+
+
     public function buscarPorRut()
     {
         return view('citas.buscar-rut');
     }
+
+
+
 
     public function mostrarCitaActu(Request $request)
     {
@@ -196,10 +206,15 @@ public function create(Request $request)
 
     return view('citas.listar-citas', compact('citas', 'rutPaciente'));
     }
+
+
+
     public function cancelarPorRut()
     {
         return view('citas.cancelar-rut');
     }
+
+
 
     public function mostrarCancelar(Request $request)
     {
@@ -211,7 +226,5 @@ public function create(Request $request)
 
         return view('citas.listar-cancelar', ['citas' => $citas,'rutPaciente' => $rut]);
     }
-
-
 
 }

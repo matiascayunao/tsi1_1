@@ -12,17 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pacientes', function (Blueprint $table) {
-    $table->string('rutPaciente', 12)->primary();
-    $table->string('nombre');
-    $table->date('fechaNacimiento');
-    $table->string('correo')->unique();
-    $table->string('telefono', 15);
+            $table->string('rutPaciente', 12)->primary();
+            $table->string('nombre');
+            $table->date('fechaNacimiento');
+            $table->string('correo')->unique();
+            $table->string('telefono', 15);
 
-    $table->foreignId('codPrevision')
-          ->constrained('previsiones', 'codPrevision')
-          ->onDelete('cascade');
-});
-
+            $table->foreignId('codPrevision')
+                  ->constrained('previsiones', 'codPrevision')
+                  ->onDelete('cascade');
+        });
     }
 
     /**

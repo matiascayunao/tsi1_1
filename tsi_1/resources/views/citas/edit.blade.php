@@ -8,7 +8,6 @@
     @csrf
     @method('PUT')
 
-    {{-- Paciente (mostrar pero enviar hidden) --}}
     <div class="mb-3">
         <label class="form-label">Paciente</label>
         <input type="text" class="form-control"
@@ -16,7 +15,6 @@
         <input type="hidden" name="rutPaciente" value="{{ $cita->rutPaciente }}">
     </div>
 
-    {{-- Médico (mostrar pero enviar hidden) --}}
     <div class="mb-3">
         <label class="form-label">Médico</label>
         <input type="text" class="form-control"
@@ -24,7 +22,6 @@
         <input type="hidden" name="rutMedico" value="{{ $cita->rutMedico }}">
     </div>
 
-    {{-- Fecha editable --}}
     <div class="mb-3">
         <label for="fechaHora" class="form-label">Nueva Fecha y Hora</label>
         <input type="datetime-local" name="fechaHora" id="fechaHora"
@@ -32,7 +29,6 @@
                value="{{ \Carbon\Carbon::parse($cita->fechaHora)->format('Y-m-d\TH:i') }}" required>
     </div>
 
-    {{-- Motivo (solo lectura o editable según quieras) --}}
     <div class="mb-3">
         <label for="motivoCita" class="form-label">Motivo</label>
         <textarea name="motivoCita" id="motivoCita" rows="3" class="form-control" readonly>{{ $cita->motivoCita }}</textarea>

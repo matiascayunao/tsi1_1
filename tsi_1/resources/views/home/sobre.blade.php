@@ -35,20 +35,14 @@
         <div class="col-12 col-md-6">
             <figure class="m-0">
                 <img src="{{ asset('images/frente.jpg') }}" class="img-fluid rounded" alt="Fachada del Centro Médico">
-                <figcaption class="small text-muted mt-1">Fachada / Frente del Centro</figcaption>
             </figure>
         </div>
         <div class="col-12 col-md-6">
             <figure class="m-0">
                 <img src="{{ asset('images/sala.jpg') }}" class="img-fluid rounded" alt="Sala de atención del Centro Médico">
-                <figcaption class="small text-muted mt-1">Sala de Atención</figcaption>
             </figure>
         </div>
     </div>
-
-    <p class="mt-3">
-        Nuestras instalaciones están diseñadas para entregar comodidad y seguridad a todos los pacientes.
-    </p>
 </div>
 
     <div class="card shadow-sm p-4 mb-4">

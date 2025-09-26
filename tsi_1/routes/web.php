@@ -91,19 +91,10 @@ Route::delete('/agenda-medicos/{agendaMedico}', [AgendaMedicosController::class,
 Route::get('/agenda-medicos/{agendaMedico}', [AgendaMedicosController::class, 'show'])->name('agendaMedicos.show');
 
 
-// Authentication Routes (if needed)
-// Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-// Route::post('login', [AuthController::class, 'login']);  
 
+//login
 Route::get('/login',  [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::get('/whoami', function () {
-    return [
-        'auth' => auth()->check(),
-        'user' => auth()->user(),
-        'session_id' => session()->getId(),
-    ];
-});

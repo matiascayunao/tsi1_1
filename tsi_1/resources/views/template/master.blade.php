@@ -4,13 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Centro Médico Biosalud</title>
-
-  {{-- Bootstrap CSS (5.3.3). Puedes dejarlo sin integrity para evitar bloqueos --}}
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-  {{-- HEADER --}}
+  {{-- header --}}
   <header class="bg-white shadow-sm">
     <div class="container d-flex justify-content-between align-items-center py-2">
       <a href="{{ route('home.index') }}">
@@ -18,15 +16,14 @@
       </a>
 
       <div class="d-flex gap-3 align-items-center">
-        {{-- Siempre visible --}}
         <a href="{{ route('citas.index') }}" class="btn btn-primary">Reserva tu hora</a>
 
-        {{-- Invitado (no logueado) --}}
+        {{-- login --}}
         @guest
           <a href="{{ route('login') }}" class="btn btn-link">👤 Personal</a>
         @endguest
 
-        {{-- Autenticado --}}
+        {{-- autenticado --}}
         @auth
           <div class="dropdown">
             <button class="btn btn-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,7 +57,7 @@
     </div>
   </header>
 
-  {{-- NAV --}}
+  {{-- nav --}}
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -80,20 +77,20 @@
     </div>
   </nav>
 
-  {{-- CONTENIDO --}}
+  {{-- contenido --}}
   <main class="w-100 my-3 bg-white rounded">
     <div class="p-3 pt-1">
       @yield('contenido')
     </div>
   </main>
 
-  {{-- FOOTER --}}
+  {{-- footer --}}
   <footer class="bg-dark text-white mt-5 p-4 text-center">
     <p class="mt-2 mb-1">Luis Cousiño 1753, Quintero, Valparaíso</p>
     <p class="mb-0">32 2934803 | biosaludquintero@hotmail.com</p>
   </footer>
 
-  {{-- Bootstrap Bundle JS (incluye Popper). Debe ir antes de </body> --}}
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

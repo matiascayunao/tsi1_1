@@ -21,7 +21,6 @@
                         <p class="mb-0">Correo: {{ $medico->correoMedico }}</p>
                         <p class="mb-0">Teléfono: {{ $medico->telefonoMedico }}</p>
                     </div>
-                    {{-- Pasamos rutMedico como parámetro --}}
                     <a href="{{ route('citas.registrarPaciente', ['rutMedico' => $medico->rutMedico, 'idPrevision' => $prevision->codPrevision]) }}" class="btn btn-primary">
                         Seleccionar
                     </a>

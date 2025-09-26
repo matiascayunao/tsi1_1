@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
        Schema::create('resumenes_citas', function (Blueprint $table) {
-    $table->unsignedBigInteger('idCita')->primary();
-    $table->string('diagnostico');
-    $table->string('prescripcion');
-    $table->string('numReceta');
+                $table->unsignedBigInteger('idCita')->primary();
+                $table->string('diagnostico');
+                $table->string('prescripcion');
+                $table->string('numReceta');
 
-    $table->foreign('idCita')
-          ->references('idCita')
-          ->on('citas_pacientes')
-          ->onDelete('cascade');
-});
+                $table->foreign('idCita')
+                    ->references('idCita')
+                    ->on('citas_pacientes')
+                    ->onDelete('cascade');
+        });
 
     }
 

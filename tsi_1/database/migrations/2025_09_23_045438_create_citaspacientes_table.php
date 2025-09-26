@@ -12,22 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('citas_pacientes', function (Blueprint $table) {
-    $table->id('idCita');
-    $table->string('rutPaciente', 12);
-    $table->string('rutMedico', 12);
-    $table->dateTime('fechaHora');
-    $table->string('motivoCita');
+                $table->id('idCita');
+                $table->string('rutPaciente', 12);
+                $table->string('rutMedico', 12);
+                $table->dateTime('fechaHora');
+                $table->string('motivoCita');
     
-    $table->foreign('rutPaciente')
-          ->references('rutPaciente')
-          ->on('pacientes')
-          ->onDelete('cascade');
+                $table->foreign('rutPaciente')
+                    ->references('rutPaciente')
+                    ->on('pacientes')
+                    ->onDelete('cascade');
 
-    $table->foreign('rutMedico')
-          ->references('rutMedico')
-          ->on('medicos')
-          ->onDelete('cascade');
-});
+                $table->foreign('rutMedico')
+                    ->references('rutMedico')
+                    ->on('medicos')
+                    ->onDelete('cascade');
+        });
 
     }
 
