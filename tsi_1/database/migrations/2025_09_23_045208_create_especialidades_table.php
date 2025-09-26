@@ -6,21 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('especialidades', function (Blueprint $table) {
-            $table->id('idEspecialidad');
-            $table->string('nombreEspecialidad');
-            //$table->timestamps();
+            $table->tinyIncrements('idEspecialidad');            // TinyInt PK (auto)
+            $table->string('nombreEspecialidad', 100);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('especialidades');

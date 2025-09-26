@@ -9,7 +9,7 @@ class ResumenCita extends Model
 {
     use HasFactory;
 
-    protected $table = 'ResumenesCitas';
+    protected $table = 'resumenes_citas';
     protected $primaryKey = 'idCita';
     public $incrementing = false;
     public $timestamps = false;
@@ -18,11 +18,11 @@ class ResumenCita extends Model
         'idCita',
         'diagnostico',
         'prescripcion',
-        'numReceta'
+        'numReceta',
     ];
 
     public function cita()
     {
-        return $this->belongsTo(CitaPaciente::class, 'idCita');
+        return $this->belongsTo(CitaPaciente::class, 'idCita', 'idCita');
     }
 }

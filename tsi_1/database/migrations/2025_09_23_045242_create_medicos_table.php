@@ -6,26 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-       Schema::create('medicos', function (Blueprint $table) {
+        Schema::create('medicos', function (Blueprint $table) {
             $table->string('rutMedico', 12)->primary();
-            $table->string('nombreMedico');
-            $table->string('correoMedico')->unique();
+            $table->string('nombreMedico', 100);
+            $table->string('correoMedico', 100)->unique();
             $table->string('telefonoMedico', 15);
 
-            $table->foreignId('idEspecialidad')
-                ->constrained('especialidades', 'idEspecialidad')
-                ->onDelete('cascade');
+            $table->unsignedTinyInteger('idEspecialidad');       // FK tinyint
+            $table->foreign('idEspecialidad')
+                  ->references('idEspecialidad')
+                  ->on('especialidades')
+                  ->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('medicos');

@@ -6,29 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('pacientes', function (Blueprint $table) {
             $table->string('rutPaciente', 12)->primary();
-            $table->string('nombre');
+            $table->string('nombre', 100);
             $table->date('fechaNacimiento');
-            $table->string('correo')->unique();
+            $table->string('correo', 100)->unique();
             $table->string('telefono', 15);
 
-            $table->foreignId('codPrevision')
-                  ->constrained('previsiones', 'codPrevision')
+            $table->unsignedTinyInteger('codPrevision');         // FK tinyint
+            $table->foreign('codPrevision')
+                  ->references('codPrevision')
+                  ->on('previsiones')
                   ->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('paciente');
+        Schema::dropIfExists('pacientes');
     }
 };

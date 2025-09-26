@@ -9,10 +9,9 @@ class AgendaMedico extends Model
 {
     use HasFactory;
 
-    protected $table = 'AgendasMedicos';
+    protected $table = 'agendas_medicos';
     public $incrementing = false;
     public $timestamps = false;
-    
 
     protected $fillable = [
         'rutMedico',
@@ -20,11 +19,11 @@ class AgendaMedico extends Model
         'horaInicio',
         'horaTermino',
         'fechaApertura',
-        'disponibilidad'
+        'disponibilidad',
     ];
 
     public function medico()
     {
-        return $this->belongsTo(Medico::class, 'rutMedico');
+        return $this->belongsTo(Medico::class, 'rutMedico', 'rutMedico');
     }
 }

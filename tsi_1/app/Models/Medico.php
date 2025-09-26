@@ -9,7 +9,7 @@ class Medico extends Model
 {
     use HasFactory;
 
-    protected $table = 'Medicos';
+    protected $table = 'medicos';
     protected $primaryKey = 'rutMedico';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -20,21 +20,21 @@ class Medico extends Model
         'nombreMedico',
         'correoMedico',
         'telefonoMedico',
-        'idEspecialidad'
+        'idEspecialidad',
     ];
 
     public function especialidad()
     {
-        return $this->belongsTo(Especialidad::class, 'idEspecialidad');
+        return $this->belongsTo(Especialidad::class, 'idEspecialidad', 'idEspecialidad');
     }
 
     public function citas()
     {
-        return $this->hasMany(CitaPaciente::class, 'rutMedico');
+        return $this->hasMany(CitaPaciente::class, 'rutMedico', 'rutMedico');
     }
 
     public function agenda()
     {
-        return $this->hasMany(AgendaMedico::class, 'rutMedico');
+        return $this->hasMany(AgendaMedico::class, 'rutMedico', 'rutMedico');
     }
 }

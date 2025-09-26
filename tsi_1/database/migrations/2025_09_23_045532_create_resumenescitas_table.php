@@ -6,28 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-       Schema::create('resumenes_citas', function (Blueprint $table) {
-                $table->unsignedBigInteger('idCita')->primary();
-                $table->string('diagnostico');
-                $table->string('prescripcion');
-                $table->string('numReceta');
+        Schema::create('resumenes_citas', function (Blueprint $table) {
+            $table->unsignedSmallInteger('idCita')->primary();   // debe calzar con smallIncrements
+            $table->string('diagnostico', 200);
+            $table->string('prescripcion', 200);
+            $table->unsignedSmallInteger('numReceta')->nullable();
 
-                $table->foreign('idCita')
-                    ->references('idCita')
-                    ->on('citas_pacientes')
-                    ->onDelete('cascade');
+            $table->foreign('idCita')
+                  ->references('idCita')
+                  ->on('citas_pacientes')
+                  ->onDelete('cascade');
         });
-
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('resumenes_citas');

@@ -5,7 +5,7 @@
     <h2>Médicos disponibles</h2>
     <p class="text-muted">
         Mostrando médicos de <strong>{{ $especialidad->nombreEspecialidad }}</strong> 
-        para la previsión <strong>{{ $prevision->nombre }}</strong>.
+        para la previsión <strong>{{ $prevision->nombrePrevision }}</strong>.
     </p>
 
     @if($medicos->isEmpty())

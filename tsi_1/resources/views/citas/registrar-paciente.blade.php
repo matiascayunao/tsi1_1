@@ -11,7 +11,7 @@
 
         <div class="mb-3">
             <label class="form-label">Previsión</label>
-            <input type="text" class="form-control" value="{{ $prevision->nombre }}" readonly>
+            <input type="text" class="form-control" value="{{ $prevision->nombrePrevision }}" readonly>
         </div>
 
         <div class="mb-3">

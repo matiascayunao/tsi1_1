@@ -12,7 +12,7 @@
             <select name="codPrevision" id="codPrevision" class="form-select" required>
                 <option value="">-- Seleccione --</option>
                 @foreach($previsiones as $prevision)
-                    <option value="{{ $prevision->codPrevision }}">{{ $prevision->nombre }}</option>
+                    <option value="{{ $prevision->codPrevision }}">{{ $prevision->nombrePrevision }}</option>
                 @endforeach
             </select>
         </div>
