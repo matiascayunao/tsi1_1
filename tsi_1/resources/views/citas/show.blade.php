@@ -19,7 +19,7 @@
     </div>
 
     <div class="mt-3">
-        <a href="{{ route('citas.index') }}" class="btn btn-secondary">Volver al listado</a>
+        <a href="{{ route('home.index') }}" class="btn btn-secondary">Volver al inicio</a>
     </div>
 </div>
 @endsection

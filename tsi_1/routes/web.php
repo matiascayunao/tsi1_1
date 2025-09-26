@@ -12,6 +12,8 @@ use App\Http\Controllers\AgendaMedicosController;
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/informacion', [HomeController::class, 'informacion'])->name('home.info');
+Route::get('/sobre', [HomeController::class, 'sobreNosotros'])->name('home.sobre');
 
 // Pacientes
 Route::get('/pacientes', [PacientesController::class, 'index'])->name('pacientes.index');
@@ -58,6 +60,9 @@ Route::post('/citas/guardar-paciente', [CitasPacientesController::class, 'guarda
 
 Route::get('/citas/modificar', [CitasPacientesController::class, 'buscarPorRut'])->name('citas.buscarPorRut');
 Route::post('/citas/modificar', [CitasPacientesController::class, 'mostrarCitaActu'])->name('citas.mostrarCitaActu');
+
+Route::get('/citas/cancelar',[CitasPacientesController::class, 'cancelarPorRut'])->name('citas.cancelarPorRut');
+Route::post('/citas/cancelar',[CitasPacientesController::class, 'mostrarCancelar'])->name('citas.mostrarCancelar');
 
 Route::get('/citas/reservar', [CitasPacientesController::class, 'create'])->name('citas.create');
 Route::post('/citas/reservar', [CitasPacientesController::class, 'store'])->name('citas.store');

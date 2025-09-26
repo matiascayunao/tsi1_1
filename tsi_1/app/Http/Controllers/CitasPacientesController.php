@@ -106,11 +106,20 @@ public function create(Request $request)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CitaPaciente $cita)
-    {
-        $cita->delete();
-        return redirect()->route('citas.index');
-    }
+   public function destroy(CitaPaciente $cita, Request $request)
+{
+    $rut = $cita->rutPaciente;
+    $cita->delete();
+
+    $citas = CitaPaciente::with(['medico', 'paciente'])
+                ->where('rutPaciente', $rut)
+                ->get();
+
+    return view('citas.listar-cancelar', [
+    'citas' => $citas,
+    'rutPaciente' => $rut
+])->with('success', 'La cita fue cancelada correctamente.');
+}
     public function buscar(Request $request)
     {
 
@@ -187,5 +196,22 @@ public function create(Request $request)
 
     return view('citas.listar-citas', compact('citas', 'rutPaciente'));
     }
+    public function cancelarPorRut()
+    {
+        return view('citas.cancelar-rut');
+    }
+
+    public function mostrarCancelar(Request $request)
+    {
+        $rut = $request->rutPaciente;
+
+        $citas = CitaPaciente::with(['medico', 'paciente'])
+                ->where('rutPaciente', $rut)
+                ->get();
+
+        return view('citas.listar-cancelar', ['citas' => $citas,'rutPaciente' => $rut]);
+    }
+
+
 
 }
