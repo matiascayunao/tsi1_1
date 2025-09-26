@@ -17,6 +17,14 @@ class PrevisionesSeeder extends Seeder
             ['nombre' => 'Fonasa', 'tipoPrevision' => 'Pública'],
             ['nombre' => 'Isapre Colmena', 'tipoPrevision' => 'Privada'],
             ['nombre' => 'Isapre Banmédica', 'tipoPrevision' => 'Privada'],
+            ['nombre' => 'Isapre Consalud', 'tipoPrevision' => 'Privada'],
+            ['nombre' => 'Isapre Cruz Blanca', 'tipoPrevision' => 'Privada'],
+            ['nombre' => 'Isapre Vida Tres', 'tipoPrevision' => 'Privada'],
+            ['nombre' => 'Isapre Nueva Masvida', 'tipoPrevision' => 'Privada'],
+            ['nombre' => 'Isapre Óptima', 'tipoPrevision' => 'Privada'],
+            ['nombre' => 'Isapre Fundación', 'tipoPrevision' => 'Privada'],
+            ['nombre' => 'Isapre Salud Total', 'tipoPrevision' => 'Privada'],
+            ['nombre' => 'Particular', 'tipoPrevision' => 'Particular'],
         ]);
     }
 }

@@ -37,7 +37,7 @@
     </div>
 
     <div class="card shadow-sm p-4">
-        <h4>ℹ Información Variada</h4>
+        <h4>Información Variada</h4>
         <p>
             Contamos con especialistas en diversas áreas médicas.  
             Se recomienda llegar con al menos <strong>15 minutos de anticipación</strong> a su cita.  

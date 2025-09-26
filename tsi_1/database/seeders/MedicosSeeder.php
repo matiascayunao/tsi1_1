@@ -28,6 +28,34 @@ class MedicosSeeder extends Seeder
                 'telefonoMedico' => '976543210',
                 'idEspecialidad' => 2
             ],
+            [
+                'rutMedico' => '55555555-5',
+                'nombreMedico' => 'Dra. Soledad Diaz',
+                'correoMedico' => 'soledad.diaz@example.com',
+                'telefonoMedico' => '123123456',
+                'idEspecialidad' => 3
+            ],
+            [
+                'rutMedico' => '21655415-9',
+                'nombreMedico' => 'Dr . Juan Pérez',
+                'correoMedico' => 'Juan.Perez@example.com',
+                'telefonoMedico' => '999947734',
+                'idEspecialidad' => 6
+            ],
+            [
+                'rutMedico' => '14444544-4',
+                'nombreMedico' => 'Dr Nabih Jeria',
+                'correoMedico' => 'nabih@example.com',
+                'telefonoMedico' => '123123123',
+                'idEspecialidad' => 4
+            ],
+            [
+                'rutMedico' => '21888888-8',
+                'nombreMedico' => 'Dra Fernanda Lopez',
+                'correoMedico' => 'fernanda.lopez@example.com',
+                'telefonoMedico' => '128930321',
+                'idEspecialidad' => 5
+            ],
         ]);
     }
 }

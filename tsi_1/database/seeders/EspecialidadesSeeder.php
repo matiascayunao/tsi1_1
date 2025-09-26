@@ -17,6 +17,13 @@ class EspecialidadesSeeder extends Seeder
             ['nombreEspecialidad' => 'Cardiología'],
             ['nombreEspecialidad' => 'Pediatría'],
             ['nombreEspecialidad' => 'Dermatología'],
+            ['nombreEspecialidad' => 'Ginecología'],
+            ['nombreEspecialidad' => 'Psicología'],
+            ['nombreEspecialidad' => 'Medicina General'],
+            ['nombreEspecialidad' => 'Nutricionista'],
+            ['nombreEspecialidad' => 'Odontología'],
+            ['nombreEspecialidad' => 'Podología'],
+            ['nombreEspecialidad' => 'Kinesiología'],
         ]);
     }
 }
