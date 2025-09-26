@@ -9,6 +9,7 @@ use App\Http\Controllers\PrevisionesController;
 use App\Http\Controllers\CitasPacientesController;
 use App\Http\Controllers\ResumenesCitasController;
 use App\Http\Controllers\AgendaMedicosController;
+use App\Http\Controllers\AuthController;
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -94,3 +95,15 @@ Route::get('/agenda-medicos/{agendaMedico}', [AgendaMedicosController::class, 's
 // Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('login', [AuthController::class, 'login']);  
 
+Route::get('/login',  [AuthController::class, 'loginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::get('/whoami', function () {
+    return [
+        'auth' => auth()->check(),
+        'user' => auth()->user(),
+        'session_id' => session()->getId(),
+    ];
+});

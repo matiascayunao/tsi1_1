@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             AgendasMedicosSeeder::class,
             CitasPacientesSeeder::class,
             ResumenesCitasSeeder::class,
+            UsuariosSeeder::class,
         ]);
     }
 }
