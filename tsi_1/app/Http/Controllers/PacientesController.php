@@ -14,8 +14,7 @@ class PacientesController extends Controller
      */
     public function index()
     {
-        $pacientes = Paciente::with('prevision')->get();
-        return view('pacientes.index', compact('pacientes'));
+    return view('pacientes.index'); // esta vista tendrá las 4 cards
     }
 
     /**
@@ -64,18 +63,18 @@ class PacientesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PacienteRequest $request, Paciente $paciente)
-    {
-        $paciente->rutPaciente = $request->rutPaciente;
-        $paciente->nombre = $request->nombre;
-        $paciente->fechaNacimiento = $request->fechaNacimiento;
-        $paciente->correo = $request->correo;
-        $paciente->telefono = $request->telefono;
-        $paciente->codPrevision = $request->codPrevision;
-        $paciente->save();
+public function update(PacienteRequest $request, Paciente $paciente)
+{
+    // NO tocar rutPaciente ni fechaNacimiento aquí
+    $paciente->nombre       = $request->nombre;
+    $paciente->correo       = $request->correo;
+    $paciente->telefono     = $request->telefono;
+    $paciente->codPrevision = $request->codPrevision;
+    $paciente->save();
 
-        return redirect()->route('pacientes.index');
-    }
+    return redirect()->route('pacientes.index');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -84,5 +83,55 @@ class PacientesController extends Controller
     {
         $paciente->delete();
         return redirect()->route('pacientes.index');
+    }
+
+    // 🔹 para Detalle
+// Ir a “Detalle Paciente”
+public function detalle(Request $request)
+{
+    return $this->listarPacientesPorRut($request, 'detalle');
+}
+
+// Ir a “Actualizar Paciente”
+public function actualizar(Request $request)
+{
+    return $this->listarPacientesPorRut($request, 'actualizar');
+}
+
+// Ir a “Eliminar Paciente”
+public function eliminar(Request $request)
+{
+    return $this->listarPacientesPorRut($request, 'eliminar');
+}
+
+// Método común para las 3 pantallas
+protected function listarPacientesPorRut(Request $request, string $modo)
+{
+    $query = Paciente::with('prevision');
+
+    if ($request->filled('rut')) {
+        $query->where('rutPaciente', 'like', '%'.$request->rut.'%');
+    }
+
+    $pacientes = $query->orderBy('nombre')->get(); // orden alfabético
+
+    return view('pacientes.listado', [
+        'pacientes'  => $pacientes,
+        'rutBuscado' => $request->rut,
+        'modo'       => $modo,
+    ]);
+}
+    public function guardar(PacienteRequest $request)
+    {
+        $paciente = new Paciente();
+        $paciente->rutPaciente = $request->rutPaciente;
+        $paciente->nombre = $request->nombre;
+        $paciente->fechaNacimiento = $request->fechaNacimiento;
+        $paciente->correo = $request->correo;
+        $paciente->telefono = $request->telefono;
+        $paciente->codPrevision = $request->codPrevision;
+        $paciente->save();
+
+        return redirect()->route('secretaria.index');
     }
 }

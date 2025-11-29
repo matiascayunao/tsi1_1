@@ -9,75 +9,99 @@ use App\Http\Requests\MedicoRequest;
 
 class MedicosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Menú principal (cards)
     public function index()
     {
-        $medicos = Medico::with('especialidad')->get();
-        return view('medicos.index', compact('medicos'));
+        return view('medicos.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // ===== LISTADOS PARA SECRETARIA =====
+
+    // Listado normal (detalle)
+    public function detalle()
+    {
+        $medicos = Medico::select('medicos.*')
+            ->leftJoin('especialidades', 'medicos.idEspecialidad', '=', 'especialidades.idEspecialidad')
+            ->with('especialidad')
+            ->orderBy('especialidades.nombreEspecialidad')
+            ->orderBy('medicos.nombreMedico')
+            ->get();
+
+        return view('medicos.detalle', compact('medicos'));
+    }
+
+    // Listado con botón de actualizar
+    public function actualizar()
+    {
+        $medicos = Medico::select('medicos.*')
+            ->leftJoin('especialidades', 'medicos.idEspecialidad', '=', 'especialidades.idEspecialidad')
+            ->with('especialidad')
+            ->orderBy('especialidades.nombreEspecialidad')
+            ->orderBy('medicos.nombreMedico')
+            ->get();
+
+        return view('medicos.actualizar', compact('medicos'));
+    }
+
+    // Listado con botón de eliminar
+    public function eliminar()
+    {
+        $medicos = Medico::select('medicos.*')
+            ->leftJoin('especialidades', 'medicos.idEspecialidad', '=', 'especialidades.idEspecialidad')
+            ->with('especialidad')
+            ->orderBy('especialidades.nombreEspecialidad')
+            ->orderBy('medicos.nombreMedico')
+            ->get();
+
+        return view('medicos.eliminar', compact('medicos'));
+    }
+
+    // =============== CRUD CLÁSICO =====================
+
     public function create()
     {
-        $especialidades = Especialidad::all();
+        $especialidades = Especialidad::orderBy('nombreEspecialidad')->get();
         return view('medicos.create', compact('especialidades'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(MedicoRequest $request)
     {
-        $medico = new Medico();
-        $medico->rutMedico = $request->rutMedico;
-        $medico->nombreMedico = $request->nombreMedico;
-        $medico->correoMedico = $request->correoMedico;
-        $medico->telefonoMedico = $request->telefonoMedico;
-        $medico->idEspecialidad = $request->idEspecialidad;
-        $medico->save();
+        Medico::create([
+            'rutMedico'      => $request->rutMedico,
+            'nombreMedico'   => $request->nombreMedico,
+            'correoMedico'   => $request->correoMedico,
+            'telefonoMedico' => $request->telefonoMedico,
+            'idEspecialidad' => $request->idEspecialidad,
+        ]);
 
         return redirect()->route('medicos.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Medico $medico)
     {
+        $medico->load('especialidad');
         return view('medicos.show', compact('medico'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Medico $medico)
     {
-        $especialidades = Especialidad::all();
+        $especialidades = Especialidad::orderBy('nombreEspecialidad')->get();
         return view('medicos.edit', compact('medico', 'especialidades'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(MedicoRequest $request, Medico $medico)
     {
-        $medico->rutMedico = $request->rutMedico;
-        $medico->nombreMedico = $request->nombreMedico;
-        $medico->correoMedico = $request->correoMedico;
-        $medico->telefonoMedico = $request->telefonoMedico;
-        $medico->idEspecialidad = $request->idEspecialidad;
-        $medico->save();
+        $medico->update([
+            'rutMedico'      => $request->rutMedico,
+            'nombreMedico'   => $request->nombreMedico,
+            'correoMedico'   => $request->correoMedico,
+            'telefonoMedico' => $request->telefonoMedico,
+            'idEspecialidad' => $request->idEspecialidad,
+        ]);
 
         return redirect()->route('medicos.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Medico $medico)
     {
         $medico->delete();

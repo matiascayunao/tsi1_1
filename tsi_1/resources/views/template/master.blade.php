@@ -20,25 +20,27 @@
 
         {{-- login --}}
         @guest
-          <a href="{{ route('login') }}" class="btn btn-link">👤 Personal</a>
+          <a href="{{ route('login') }}" class="btn">👤 Personal</a>
         @endguest
 
         {{-- autenticado --}}
         @auth
           <div class="dropdown">
-            <button class="btn btn-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               👤 {{ Auth::user()->nombre }}
               <span class="badge text-bg-secondary ms-1">{{ Auth::user()->rol }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
               @if(Auth::user()->rol === 'secretaria')
-                <li><a class="dropdown-item" href="#">Gestión de Pacientes</a></li>
-                <li><a class="dropdown-item" href="#">Gestión de Médicos</a></li>
-                <li><a class="dropdown-item" href="#">Ver todas las citas</a></li>
+               <a href="{{ route('secretaria.index') }}">
+                <li><a class="dropdown-item" href="{{ route('pacientes.index') }}">Gestión de Pacientes</a></li>
+                <li><a class="dropdown-item" href="{{ route('medicos.index') }}">Gestión de Médicos</a></li>
+                <li><a class="dropdown-item" href="{{ route('citas.calendario') }}">Ver todas las citas</a></li>
                 <li><hr class="dropdown-divider"></li>
               @endif
 
               @if(Auth::user()->rol === 'medico')
+                <a href="{{ route('medico.index') }}">
                 <li><a class="dropdown-item" href="#">Mis Pacientes</a></li>
                 <li><a class="dropdown-item" href="#">Mis Citas</a></li>
                 <li><hr class="dropdown-divider"></li>

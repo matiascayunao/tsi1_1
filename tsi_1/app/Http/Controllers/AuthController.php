@@ -15,25 +15,36 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        
         $credenciales = $request->validate([
-            'rut' => 'required|string',
+            'rut'      => 'required|string',
             'password' => 'required|string',
         ]);
 
-        
         $ok = Auth::attempt([
-            'rut' => $credenciales['rut'],
+            'rut'      => $credenciales['rut'],
             'password' => $credenciales['password'],
-        ], false); 
+        ], false);
 
-        
         Log::info('Intento login', ['rut' => $credenciales['rut'], 'ok' => $ok]);
 
         if ($ok) {
-            $request->session()->regenerate(); 
-            return redirect()->intended(route('home.index'))
-                   ->with('success', 'Sesión iniciada como ' . Auth::user()->rol);
+            $request->session()->regenerate();
+
+            // 🔹 SOLO LO NECESARIO: decidir a dónde redirigir según el rol
+            $user    = Auth::user();
+            $destino = route('home.index');               // por defecto
+
+            if ($user->rol === 'secretaria') {
+                $destino = route('secretaria.index');     // panel secretaria
+            }
+            // aquí podrías agregar más roles si quieres:
+            // if ($user->rol === 'medico') { ... }
+            if ($user->rol === 'medico') {
+                $destino = route('medico.index');         // panel médico
+            }
+
+            return redirect()->intended($destino)
+                ->with('success', 'Sesión iniciada como ' . $user->rol);
         }
 
         return back()->withErrors(['rut' => 'RUT o contraseña incorrectos.'])

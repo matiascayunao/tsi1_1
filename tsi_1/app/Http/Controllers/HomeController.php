@@ -16,4 +16,11 @@ class HomeController extends Controller
     public function sobreNosotros(){
         return view('home.sobre');
     }
+
+    public function indexSecretaria(){
+        return view('home.index-secretaria');
+    }
+    public function indexMedico(){
+        return view('home.index-medico');
+    }
 }

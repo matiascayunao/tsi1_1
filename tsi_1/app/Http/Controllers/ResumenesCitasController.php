@@ -80,4 +80,17 @@ class ResumenesCitasController extends Controller
         $resumen->delete();
         return redirect()->route('resumenes.index');
     }
+
+    public function porPaciente($rutPaciente)
+    {
+    $paciente = Paciente::findOrFail($rutPaciente);
+
+    $resumenes = ResumenCita::with(['cita.medico'])
+        ->whereHas('cita', function ($q) use ($rutPaciente) {
+            $q->where('rutPaciente', $rutPaciente);
+        })
+        ->get();
+
+    return view('resumenes.por-paciente', compact('paciente', 'resumenes'));
+    }
 }
