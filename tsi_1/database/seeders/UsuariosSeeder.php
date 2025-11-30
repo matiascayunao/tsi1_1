@@ -23,6 +23,14 @@ class UsuariosSeeder extends Seeder
                 'password' => Hash::make('12345678'),
                 'rol' => 'medico',
             ],
+            [
+                'rut' => '4',
+                'nombre' => ' Dr Test',
+                'password' => Hash::make('1'),
+                'rol' => 'medico',
+            ],
+
+
         ]);
     }
 }

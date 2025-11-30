@@ -15,7 +15,10 @@ return new class extends Migration
             $table->string('correo', 100)->unique();
             $table->string('telefono', 15);
 
-            $table->unsignedTinyInteger('codPrevision');         // FK tinyint
+            // 👇 aquí agregas los timestamps
+            $table->timestamps();
+
+            $table->unsignedTinyInteger('codPrevision');
             $table->foreign('codPrevision')
                   ->references('codPrevision')
                   ->on('previsiones')

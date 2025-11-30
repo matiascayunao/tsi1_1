@@ -27,10 +27,11 @@
                         <td>{{ $cita->paciente->prevision->nombrePrevision ?? '-' }}</td>
                         <td>{{ $cita->motivoCita }}</td>
                         <td class="text-end">
-                            <a href="{{ route('citas.show', $cita->idCita) }}"
-                               class="btn btn-sm btn-outline-primary">
-                                Ver detalle
-                            </a>
+                            <a href="{{ route('medico.citas.show', $cita->idCita) }}"
+   class="btn btn-sm btn-outline-primary">
+    Ver detalle
+</a>
+
                         </td>
                     </tr>
                 @endforeach

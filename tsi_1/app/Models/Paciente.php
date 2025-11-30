@@ -14,7 +14,7 @@ class Paciente extends Model
     public $incrementing = false; 
     protected $keyType = 'string';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'rutPaciente',

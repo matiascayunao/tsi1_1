@@ -56,6 +56,13 @@ class MedicosSeeder extends Seeder
                 'telefonoMedico' => '128930321',
                 'idEspecialidad' => 5
             ],
+            [
+                'rutMedico' => '4',
+                'nombreMedico' => 'Dr Test',
+                'correoMedico' => 'dr.test@example.com',
+                'telefonoMedico' => '128930321',
+                'idEspecialidad' => 1
+            ],
         ]);
     }
 }

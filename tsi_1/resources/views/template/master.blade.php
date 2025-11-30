@@ -60,24 +60,34 @@
   </header>
 
   {{-- nav --}}
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Mostrar navegación">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3EC7C2;">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Mostrar navegación">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a class="nav-link" href="{{ route('home.info') }}">Información para Pacientes</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('citas.index') }}">Médicos y Especialistas</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('citas.buscarPorRut') }}">Modificar Cita</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('citas.cancelarPorRut') }}">Cancelar Cita</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('home.sobre') }}">Sobre Nosotros</a></li>
-        </ul>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ route('home.info') }}">Información para Pacientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ route('citas.index') }}">Médicos y Especialistas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ route('citas.buscarPorRut') }}">Modificar Cita</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ route('citas.cancelarPorRut') }}">Cancelar Cita</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ route('home.sobre') }}">Sobre Nosotros</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
   {{-- contenido --}}
   <main class="w-100 my-3 bg-white rounded">
@@ -87,11 +97,10 @@
   </main>
 
   {{-- footer --}}
-  <footer class="bg-dark text-white mt-5 p-4 text-center">
+  <footer class="mt-5 p-4 text-center" style="background-color: #3EC7C2; color: #ffffff;">
     <p class="mt-2 mb-1">Luis Cousiño 1753, Quintero, Valparaíso</p>
     <p class="mb-0">32 2934803 | biosaludquintero@hotmail.com</p>
   </footer>
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

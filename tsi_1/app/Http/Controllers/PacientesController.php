@@ -107,18 +107,29 @@ public function eliminar(Request $request)
 // Método común para las 3 pantallas
 protected function listarPacientesPorRut(Request $request, string $modo)
 {
+    $orden = $request->query('orden', 'nombre'); // 'nombre' o 'fecha'
+
     $query = Paciente::with('prevision');
 
     if ($request->filled('rut')) {
         $query->where('rutPaciente', 'like', '%'.$request->rut.'%');
     }
 
-    $pacientes = $query->orderBy('nombre')->get(); // orden alfabético
+    if ($orden === 'fecha') {
+        // orden por fecha de creación (más nuevos primero)
+        $query->orderBy('created_at', 'desc');
+    } else {
+        // orden alfabético por defecto
+        $query->orderBy('nombre');
+    }
+
+    $pacientes = $query->get();
 
     return view('pacientes.listado', [
         'pacientes'  => $pacientes,
         'rutBuscado' => $request->rut,
         'modo'       => $modo,
+        'orden'      => $orden,
     ]);
 }
     public function guardar(PacienteRequest $request)

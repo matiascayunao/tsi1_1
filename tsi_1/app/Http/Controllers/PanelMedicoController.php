@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\CitaPaciente;
-use App\Models\Paciente;
 use App\Models\ResumenCita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,11 +11,10 @@ use Carbon\Carbon;
 class PanelMedicoController extends Controller
 {
     /**
-     * Menú principal del médico: Ver citas / Ver pacientes
+     * Pantalla principal del médico (si la usas).
      */
     public function index()
     {
-        // Tu pantalla principal de médico está en home/index-medico.blade.php
         return view('home.index-medico');
     }
 
@@ -25,7 +23,7 @@ class PanelMedicoController extends Controller
      */
     public function citas(Request $request)
     {
-        // AJUSTA ESTA LÍNEA SEGÚN Users:
+        // Ajusta esto según tu tabla users
         $rutMedico = Auth::user()->rutMedico ?? Auth::user()->rut ?? null;
 
         if (!$rutMedico) {
@@ -63,7 +61,6 @@ class PanelMedicoController extends Controller
             ->groupBy('fecha')
             ->pluck('total', 'fecha');
 
-        // 👇 aquí uso el nombre REAL de tu vista: medicos/medico-citas.blade.php
         return view('medicos.medico-citas', [
             'semanas'      => $semanas,
             'hoy'          => $hoy,
@@ -96,7 +93,6 @@ class PanelMedicoController extends Controller
             ->orderBy('fechaHora')
             ->get();
 
-        // 👇 nombre REAL de tu vista: medicos/citas-dia.blade.php
         return view('medicos.citas-dia', [
             'citas' => $citas,
             'fecha' => $fecha,
@@ -105,47 +101,57 @@ class PanelMedicoController extends Controller
 
     /**
      * Listado de pacientes atendidos por ese médico,
-     * con info de si tiene resumen o no.
+     * mostrando la última cita y si tiene resumen o no.
      */
-    public function pacientes()
-{
-    // AJUSTA IGUAL QUE ARRIBA
-    $rutMedico = Auth::user()->rutMedico ?? Auth::user()->rut ?? null;
-    if (!$rutMedico) {
-        abort(403, 'Falta vincular el usuario con el médico.');
+   public function pacientes()
+    {
+        $rutMedico = Auth::user()->rutMedico ?? Auth::user()->rut ?? null;
+        if (!$rutMedico) {
+            abort(403, 'Falta vincular el usuario con el médico.');
+        }
+
+        $citas = CitaPaciente::with('paciente')
+            ->where('rutMedico', $rutMedico)
+            ->orderBy('fechaHora', 'desc')
+            ->get();
+
+        $grupos = $citas->groupBy('rutPaciente');
+
+        $items = $grupos->map(function ($grupo) {
+            $cita = $grupo->sortByDesc('fechaHora')->first();
+
+            return [
+                'paciente'   => $cita->paciente,
+                'ultimaCita' => $cita->fechaHora,
+                'idCita'     => $cita->idCita,
+            ];
+        })->sortByDesc('ultimaCita');
+
+        $idsCita = $items->pluck('idCita')->all();
+
+        $resumenes = ResumenCita::whereIn('idCita', $idsCita)
+            ->get()
+            ->keyBy('idCita');
+
+        return view('medicos.pacientes', [
+            'items'     => $items,
+            'resumenes' => $resumenes,
+        ]);
     }
 
-    // Todas las citas del médico (con el paciente)
-    $citas = CitaPaciente::with('paciente')
-        ->where('rutMedico', $rutMedico)
-        ->orderBy('fechaHora', 'desc')   // ✅ usamos la fecha de la cita
-        ->get();
+    /**
+     * Detalle de una cita con template de médico.
+     */
+    public function verCita(CitaPaciente $cita)
+    {
+        $rutMedico = Auth::user()->rutMedico ?? Auth::user()->rut ?? null;
 
-    // Agrupar por paciente y quedarnos con última cita
-    $grupos = $citas->groupBy('rutPaciente');
+        if (!$rutMedico || $cita->rutMedico !== $rutMedico) {
+            abort(403, 'No puedes ver citas de otros médicos.');
+        }
 
-    $items = $grupos->map(function ($grupo) {
-        $cita = $grupo->sortByDesc('fechaHora')->first();
-        return [
-            'paciente'   => $cita->paciente,
-            'ultimaCita' => $cita->fechaHora,
-        ];
-    })->sortByDesc('ultimaCita');
+        $cita->load(['paciente.prevision', 'medico.especialidad']);
 
-    // Buscar resúmenes existentes por paciente+medico
-    // Buscar resúmenes existentes por paciente
-$rutPacientes = $grupos->keys()->all();
-
-$resumenes = ResumenCita::whereIn('rutPaciente', $rutPacientes)
-    ->get()
-    ->keyBy('rutPaciente');
-
-
-    return view('medicos.pacientes', [
-        'items'      => $items,
-        'resumenes'  => $resumenes,
-        'rutMedico'  => $rutMedico,
-    ]);
-}
-
+        return view('medicos.cita-detalle', compact('cita'));
+    }
 }

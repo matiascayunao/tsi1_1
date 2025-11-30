@@ -29,45 +29,43 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             @if(Auth::user()->rol === 'medico')
-                <li><a class="dropdown-item" href="{{ route('medico.pacientes') }}">Mis Pacientes</a></li>
-                <li><a class="dropdown-item" href="{{ route('medico.citas') }}">Mis Citas</a></li>
-                <li><hr class="dropdown-divider"></li>
-              @endif
+              <li><a class="dropdown-item" href="{{ route('medico.pacientes') }}">Mis Pacientes</a></li>
+              <li><a class="dropdown-item" href="{{ route('medico.citas') }}">Mis Citas</a></li>
+              <li><hr class="dropdown-divider"></li>
+            @endif
 
             <li>
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="dropdown-item">Cerrar sesión</button>
-                
               </form>
             </li>
           </ul>
         </div>
       @endauth
-    </div> {{-- <-- solo este div cierra el .container --}}
+    </div>
   </header>
 
   {{-- nav --}}
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Mostrar navegación">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3EC7C2;">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Mostrar navegación">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        {{-- gap-3 agrega separación entre los items --}}
-        <ul class="navbar-nav mx-auto gap-3">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('medico.pacientes') }}">Mis Pacientes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('medico.citas') }}">Mis Citas</a>
-          </li>
-        </ul>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto gap-3">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ route('medico.pacientes') }}">Mis Pacientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ route('medico.citas') }}">Mis Citas</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
   {{-- contenido --}}
   <main class="w-100 my-3 bg-white rounded">
@@ -77,7 +75,7 @@
   </main>
 
   {{-- footer --}}
-  <footer class="bg-dark text-white mt-5 p-4 text-center">
+  <footer class="mt-5 p-4 text-center" style="background-color: #3EC7C2; color:#ffffff;">
     <p class="mt-2 mb-1">Luis Cousiño 1753, Quintero, Valparaíso</p>
     <p class="mb-0">32 2934803 | biosaludquintero@hotmail.com</p>
   </footer>
