@@ -376,48 +376,56 @@ class CitasPacientesController extends Controller
      *   y se usa la previsión guardada en la BD.
      */
     public function usarPaciente(Request $request)
-    {
-        $request->validate([
-            'rutExistente' => 'required|string|max:9|min:8|',
-            'rutMedico'    => 'required|string|max:9|min:8|',
-
-            ], [
+{
+    $request->validate(
+        [
+            'rutExistente' => 'required|string|max:9|min:8',
+            'rutMedico'    => 'required|string|max:9|min:8|exists:medicos,rutMedico',
+        ],
+        [
+            // RUT paciente
             'rutExistente.required' => 'El RUT del paciente es obligatorio.',
             'rutExistente.max'      => 'El RUT del paciente no puede tener más de 9 caracteres.',
             'rutExistente.min'      => 'El RUT del paciente debe tener al menos 8 caracteres.',
+
+            // RUT médico (oculto)
+            'rutMedico.required'    => 'Falta el médico seleccionado en el paso anterior.',
+            'rutMedico.exists'      => 'El médico seleccionado no existe en el sistema.',
             'rutMedico.max'         => 'El RUT del médico no puede tener más de 9 caracteres.',
             'rutMedico.min'         => 'El RUT del médico debe tener al menos 8 caracteres.',
-        ]);
+        ]
+    );
 
-        $rut = $request->rutExistente;
+    $rut = $request->rutExistente;
 
-        if (!$this->validarRut($rut)) {
-            return back()
-                ->withErrors(['rutExistente' => 'El RUT ingresado no es válido.'])
-                ->withInput();
-        }
-
-        $paciente = Paciente::where('rutPaciente', $rut)->first();
-
-        if (!$paciente) {
-            return back()
-                ->withErrors([
-                    'rutExistente' => 'No se encontró un paciente con ese RUT. Puedes registrarlo en el formulario de la izquierda.',
-                ])
-                ->withInput();
-        }
-
-        // IMPORTANTE: no tocamos su previsión, usamos la que ya tiene
-        return redirect()
-            ->route('citas.create', [
-                'rutMedico'   => $request->rutMedico,
-                'rutPaciente' => $paciente->rutPaciente,
-            ])
-            ->with([
-                'rutPacienteSel' => $paciente->rutPaciente,
-                'rutMedicoSel'   => $request->rutMedico,
-            ]);
+    // Validación módulo 11
+    if (!$this->validarRut($rut)) {
+        return back()
+            ->withErrors(['rutExistente' => 'El RUT ingresado no es válido.'])
+            ->withInput();
     }
+
+    $paciente = Paciente::where('rutPaciente', $rut)->first();
+
+    if (!$paciente) {
+        return back()
+            ->withErrors([
+                'rutExistente' => 'No se encontró un paciente con ese RUT. Puedes registrarlo en el formulario de la izquierda.',
+            ])
+            ->withInput();
+    }
+
+    // IMPORTANTE: no tocamos su previsión, usamos la que ya tiene
+    return redirect()
+        ->route('citas.create', [
+            'rutMedico'   => $request->rutMedico,
+            'rutPaciente' => $paciente->rutPaciente,
+        ])
+        ->with([
+            'rutPacienteSel' => $paciente->rutPaciente,
+            'rutMedicoSel'   => $request->rutMedico,
+        ]);
+}
 
     // ===================== MODIFICAR / CANCELAR CITA POR RUT =====================
 

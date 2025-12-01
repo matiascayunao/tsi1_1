@@ -28,7 +28,7 @@
                         <li>Horarios según disponibilidad real</li>
                         <li>Confirmación inmediata de la cita</li>
                     </ul>
-                    <a href="{{ route('citas.create') }}" class="btn btn-primary mt-auto w-100">
+                    <a href="{{ route('citas.index') }}" class="btn btn-primary mt-auto w-100">
                         Reservar ahora
                     </a>
                 </div>
