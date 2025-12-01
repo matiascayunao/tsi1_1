@@ -50,6 +50,18 @@ class ResumenesCitasController extends Controller
      */
     public function storeDesdeMedico(ResumenRequest $request, CitaPaciente $cita)
     {
+        // 🔒 Validación extra para el número de receta
+        $request->validate(
+            [
+                'numReceta' => 'nullable|numeric|min:0|max:999999',
+            ],
+            [
+                'numReceta.numeric' => 'El número de receta debe ser un valor numérico.',
+                'numReceta.min'     => 'El número de receta no puede ser negativo.',
+                'numReceta.max'     => 'El número de receta no puede ser mayor a 999.999.',
+            ]
+        );
+
         $resumen = ResumenCita::firstOrNew(['idCita' => $cita->idCita]);
 
         $resumen->diagnostico  = $request->diagnostico;
@@ -80,6 +92,18 @@ class ResumenesCitasController extends Controller
      */
     public function updateDesdeMedico(ResumenRequest $request, CitaPaciente $cita)
     {
+        // 🔒 Misma validación para edición
+        $request->validate(
+            [
+                'numReceta' => 'nullable|numeric|min:0|max:999999',
+            ],
+            [
+                'numReceta.numeric' => 'El número de receta debe ser un valor numérico.',
+                'numReceta.min'     => 'El número de receta no puede ser negativo.',
+                'numReceta.max'     => 'El número de receta no puede ser mayor a 999.999.',
+            ]
+        );
+
         $resumen = ResumenCita::findOrFail($cita->idCita);
 
         $resumen->diagnostico  = $request->diagnostico;
@@ -103,7 +127,6 @@ class ResumenesCitasController extends Controller
             ])
             ->findOrFail($cita->idCita);
 
-        // 👈 ESTA ES LA VISTA QUE ESTABA FALLANDO
         return view('medicos.resumen-show', compact('resumen'));
     }
 }

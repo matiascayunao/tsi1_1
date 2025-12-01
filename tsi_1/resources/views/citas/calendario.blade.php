@@ -9,8 +9,8 @@
 
         <div>
             <a href="{{ route('citas.calendario', [
-                    'mes' => $mesAnterior->month,
-                    'anio' => $mesAnterior->year,
+                    'mes'       => $mesAnterior->month,
+                    'anio'      => $mesAnterior->year,
                     'rutMedico' => $rutMedico
                 ]) }}"
                class="btn btn-outline-secondary btn-sm">
@@ -22,8 +22,8 @@
             </span>
 
             <a href="{{ route('citas.calendario', [
-                    'mes' => $mesSiguiente->month,
-                    'anio' => $mesSiguiente->year,
+                    'mes'       => $mesSiguiente->month,
+                    'anio'      => $mesSiguiente->year,
                     'rutMedico' => $rutMedico
                 ]) }}"
                class="btn btn-outline-secondary btn-sm">
@@ -51,7 +51,7 @@
         </form>
     </div>
 
-    {{-- Calendario gigante (Lun a Sáb, sin domingo) --}}
+    {{-- Calendario (solo lunes a viernes) --}}
     <table class="table table-bordered text-center align-middle">
         <thead class="table-light">
             <tr>
@@ -60,16 +60,14 @@
                 <th>Mié</th>
                 <th>Jue</th>
                 <th>Vie</th>
-                <th>Sáb</th>
             </tr>
         </thead>
         <tbody>
             @foreach($semanas as $semana)
                 <tr>
                     @foreach($semana as $dia)
-                        {{-- Saltar los domingos --}}
-                        @if($dia->isSunday())
-                            @continue
+                        @if($dia->isWeekend())
+                            @continue {{-- salta sábado y domingo --}}
                         @endif
 
                         @php
@@ -90,7 +88,7 @@
 
                         <td class="{{ $clases }}">
                             <a href="{{ route('citas.porDia', [
-                                    'fecha' => $dia->format('Y-m-d'),
+                                    'fecha'     => $dia->format('Y-m-d'),
                                     'rutMedico' => $rutMedico
                                 ]) }}">
                                 <div class="fw-bold">{{ $dia->day }}</div>

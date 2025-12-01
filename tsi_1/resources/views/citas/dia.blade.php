@@ -4,6 +4,12 @@
 <div class="container mt-4">
     <h2>Citas del día {{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}</h2>
 
+    @if(session('success'))
+        <div class="alert alert-success mt-2">
+            {{ session('success') }}
+        </div>
+    @endif
+
     {{-- Filtro por médico --}}
     <form id="filtroDia" method="GET" class="row g-3 mt-2 mb-3">
         <input type="hidden" name="fecha" value="{{ $fecha }}">
@@ -55,8 +61,8 @@
                         <td>{{ $cita->medico->especialidad->nombreEspecialidad ?? '-' }}</td>
                         <td>{{ $cita->motivoCita }}</td>
                         <td class="text-end">
-                            {{-- Modificar --}}
-                            <a href="{{ route('citas.edit', $cita->idCita) }}"
+                            {{-- Modificar (usa la vista con template.secretaria) --}}
+                            <a href="{{ route('citas.editSecretaria', ['cita' => $cita->idCita, 'fecha' => $fecha]) }}"
                                class="btn btn-sm btn-warning">
                                 Modificar
                             </a>

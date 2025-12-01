@@ -1,4 +1,4 @@
-@extends('template.master')
+@extends('template.secretaria')
 
 @section('contenido')
 <div class="container mt-4">
@@ -13,12 +13,12 @@
     {{-- Calendario de horas del médico --}}
     <div class="card p-4 shadow-sm mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <a href="{{ route('citas.edit', ['cita' => $cita->idCita, 'fecha' => $diaAnterior]) }}"
+            <a href="{{ route('citas.editSecretaria', ['cita' => $cita->idCita, 'fecha' => $diaAnterior]) }}"
                class="btn btn-sm btn-outline-secondary">&laquo; Día anterior</a>
 
             <strong>{{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}</strong>
 
-            <a href="{{ route('citas.edit', ['cita' => $cita->idCita, 'fecha' => $diaSiguiente]) }}"
+            <a href="{{ route('citas.editSecretaria', ['cita' => $cita->idCita, 'fecha' => $diaSiguiente]) }}"
                class="btn btn-sm btn-outline-secondary">Día siguiente &raquo;</a>
         </div>
 
@@ -54,7 +54,7 @@
     </div>
 
     {{-- Formulario de guardado --}}
-    <form action="{{ route('citas.update', $cita->idCita) }}" method="POST" class="card p-4 shadow-sm">
+    <form action="{{ route('citas.updateSecretaria', $cita->idCita) }}" method="POST" class="card p-4 shadow-sm">
         @csrf
         @method('PUT')
 

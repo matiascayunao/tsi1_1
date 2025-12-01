@@ -81,11 +81,9 @@
 
     </div>
 
-    {{-- Segunda fila opcional con accesos más directos --}}
-    <div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
-
-        {{-- Atajo: Agendar nueva cita --}}
-        <div class="col">
+    {{-- Segunda fila: Agendar nueva cita (centrado) --}}
+    <div class="row justify-content-center mt-4">
+        <div class="col-12 col-md-8 col-lg-6">
             <div class="card h-100 border-0 shadow-sm">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
@@ -94,30 +92,12 @@
                             Seleccionar paciente, médico, fecha y hora para registrar una nueva atención.
                         </p>
                     </div>
-                    <a href="{{ route('citas.create') }}" class="btn btn-outline-primary">
+                    <a href="{{ route('secretaria.citas.create') }}" class="btn btn-outline-primary">
                         Agendar
                     </a>
                 </div>
             </div>
         </div>
-
-        {{-- Atajo: Ver resumen de citas (si lo usas) --}}
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <div>
-                        <h5 class="card-title mb-1">Resúmenes de atención</h5>
-                        <p class="card-text small text-muted mb-0">
-                            Consultar los resúmenes registrados por médico y paciente.
-                        </p>
-                    </div>
-                    <a href="{{ route('resumenCitas.index') }}" class="btn btn-outline-secondary">
-                        Ver resúmenes
-                    </a>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 @endsection

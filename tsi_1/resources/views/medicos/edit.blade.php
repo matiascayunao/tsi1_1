@@ -8,28 +8,40 @@
         @csrf
         @method('PUT')
 
+        {{-- RUT sólo para mostrar, NO editable --}}
         <div class="mb-3">
             <label class="form-label">RUT</label>
-            <input type="text" name="rutMedico" class="form-control"
-                   value="{{ old('rutMedico', $medico->rutMedico) }}" required>
+            <input type="text"
+                   class="form-control"
+                   value="{{ $medico->rutMedico }}"
+                   readonly>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nombre</label>
             <input type="text" name="nombreMedico" class="form-control"
                    value="{{ old('nombreMedico', $medico->nombreMedico) }}" required>
+            @error('nombreMedico')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Correo</label>
             <input type="email" name="correoMedico" class="form-control"
-                   value="{{ old('correoMedico', $medico->correoMedico) }}" required>
+                   value="{{ old('correoMedico', $medico->correoMedico) }}">
+            @error('correoMedico')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Teléfono</label>
             <input type="text" name="telefonoMedico" class="form-control"
-                   value="{{ old('telefonoMedico', $medico->telefonoMedico) }}" required>
+                   value="{{ old('telefonoMedico', $medico->telefonoMedico) }}">
+            @error('telefonoMedico')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -42,6 +54,9 @@
                     </option>
                 @endforeach
             </select>
+            @error('idEspecialidad')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
         </div>
 
         <button type="submit" class="btn btn-success w-100">

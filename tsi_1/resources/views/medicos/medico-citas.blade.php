@@ -30,23 +30,30 @@
                 <th>Mié</th>
                 <th>Jue</th>
                 <th>Vie</th>
-                <th>Sáb</th>
-                <th>Dom</th>
             </tr>
         </thead>
         <tbody>
             @foreach($semanas as $semana)
                 <tr>
                     @foreach($semana as $dia)
+                        @if($dia->isWeekend())
+                            @continue {{-- salta sábado y domingo --}}
+                        @endif
+
                         @php
                             $esOtroMes = $dia->month != $mes;
                             $esPasado  = $dia->lt($hoy);
                             $esHoy     = $dia->isSameDay($hoy);
 
                             $clases = 'calendar-day';
-                            if ($esOtroMes) { $clases .= ' other-month'; }
-                            elseif ($esPasado) { $clases .= ' past'; }
-                            if ($esHoy) { $clases .= ' today'; }
+                            if ($esOtroMes) {
+                                $clases .= ' other-month';
+                            } elseif ($esPasado) {
+                                $clases .= ' past';
+                            }
+                            if ($esHoy) {
+                                $clases .= ' today';
+                            }
 
                             $fechaKey = $dia->format('Y-m-d');
                             $totalDia = $conteoCitas[$fechaKey] ?? 0;
