@@ -30,6 +30,14 @@ class AgendasMedicosSeeder extends Seeder
                 'fechaApertura' => '2025-09-21',
                 'disponibilidad' => true
             ],
+            [
+                'rutMedico' => '14444188-5',
+                'fecha' => '2025-12-01',
+                'horaInicio' => '08:00:00',
+                'horaTermino' => '12:00:00',
+                'fechaApertura' => '2025-12-01',
+                'disponibilidad' => true
+            ]
         ]);
     }
 }

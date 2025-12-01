@@ -12,7 +12,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('idCita')->primary();   // debe calzar con smallIncrements
             $table->string('diagnostico', 200);
             $table->string('prescripcion', 200);
-            $table->unsignedSmallInteger('numReceta')->nullable();
+            $table->integer('numReceta')->nullable();
 
             $table->foreign('idCita')
                   ->references('idCita')
