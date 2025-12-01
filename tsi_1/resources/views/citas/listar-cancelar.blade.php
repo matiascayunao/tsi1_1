@@ -2,7 +2,7 @@
 
 @section('contenido')
 <div class="container mt-4">
-    <h2>Citas agendadas para el RUT: {{ $rutPaciente }}</h2>
+    <h2>Citas agendadas para el RUN: {{ $rutPaciente }}</h2>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -11,7 +11,7 @@
     @endif
 
     @if($citas->isEmpty())
-        <div class="alert alert-warning">No se encontraron citas para este RUT.</div>
+        <div class="alert alert-warning">No se encontraron citas para este RUN.</div>
     @else
         <div class="list-group">
             @foreach($citas as $cita)

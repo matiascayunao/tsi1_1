@@ -12,7 +12,7 @@
             <thead>
                 <tr>
                     <th>Paciente</th>
-                    <th>RUT</th>
+                    <th>RUN</th>
                     <th>Última cita</th>
                     <th class="text-end">Resumen</th>
                 </tr>

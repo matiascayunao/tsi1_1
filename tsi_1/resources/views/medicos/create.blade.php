@@ -18,7 +18,7 @@
         @csrf
 
         <div class="mb-3">
-            <label class="form-label">RUT</label>
+            <label class="form-label">RUN</label>
             <input type="text" name="rutMedico" class="form-control"
                    value="{{ old('rutMedico') }}" required>
             @error('rutMedico')
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const valor = rutInput.value.trim();
         if (!validarRutChile(valor)) {
             e.preventDefault();
-            alert('El RUT ingresado no es válido. Revísalo e inténtalo nuevamente.');
+            alert('El RUN ingresado no es válido. Revísalo e inténtalo nuevamente.');
             rutInput.focus();
         }
     });

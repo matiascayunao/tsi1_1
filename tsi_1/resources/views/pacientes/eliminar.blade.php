@@ -33,7 +33,7 @@
             <thead class="table-light">
                 <tr>
                     <th>Nombre</th>
-                    <th>RUT</th>
+                    <th>RUN</th>
                     <th>Previsión</th>
                     <th class="text-end">Acciones</th>
                 </tr>

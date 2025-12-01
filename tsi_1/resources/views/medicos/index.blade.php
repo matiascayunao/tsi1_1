@@ -19,7 +19,7 @@
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title mb-2">Nuevo profesional</h5>
                     <p class="card-text flex-grow-1">
-                        Registrar un médico incorporando su RUT, nombre, correo, teléfono
+                        Registrar un médico incorporando su RUN, nombre, correo, teléfono
                         y especialidad correspondiente.
                     </p>
                     <a href="{{ route('medicos.create') }}" class="btn btn-primary w-100 mt-auto">
@@ -39,7 +39,7 @@
                     <h5 class="card-title mb-2">Listado completo</h5>
                     <p class="card-text flex-grow-1">
                         Ver el listado de todos los médicos registrados, con su especialidad,
-                        datos de contacto y RUT.
+                        datos de contacto y RUN.
                     </p>
                     <a href="{{ route('medicos.detalle') }}" class="btn btn-info text-white w-100 mt-auto">
                         Ver listado de médicos

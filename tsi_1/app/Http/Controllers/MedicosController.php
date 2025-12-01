@@ -74,10 +74,10 @@ class MedicosController extends Controller
             'idEspecialidad' => 'required|exists:especialidades,idEspecialidad',
 
         ], [
-            'rutMedico.required'      => 'El RUT del médico es obligatorio.',
-            'rutMedico.unique'        => 'El RUT ingresado ya está registrado.',
-            'rutMedico.max'           => 'El RUT no puede tener más de 9 caracteres.',
-            'rutMedico.min'           => 'El RUT debe tener al menos 8 caracteres.',
+            'rutMedico.required'      => 'El RUN del médico es obligatorio.',
+            'rutMedico.unique'        => 'El RUN ingresado ya está registrado.',
+            'rutMedico.max'           => 'El RUN no puede tener más de 9 caracteres.',
+            'rutMedico.min'           => 'El RUN debe tener al menos 8 caracteres.',
             'nombreMedico.required'   => 'El nombre del médico es obligatorio.',
             
             'correoMedico.email'      => 'Debes ingresar un correo electrónico válido.',
@@ -92,7 +92,7 @@ class MedicosController extends Controller
         // 2) Validar RUT con módulo 11
         if (!$this->validarRutChile($request->rutMedico)) {
             return back()
-                ->withErrors(['rutMedico' => 'El RUT ingresado no es válido.'])
+                ->withErrors(['rutMedico' => 'El RUN ingresado no es válido.'])
                 ->withInput();
         }
 
@@ -122,7 +122,7 @@ class MedicosController extends Controller
             ->route('medicos.index')
             ->with(
                 'success',
-                "Médico creado correctamente. Usuario (RUT): {$request->rutMedico} | Contraseña: {$passwordPlano}"
+                "Médico creado correctamente. Usuario (RUN): {$request->rutMedico} | Contraseña: {$passwordPlano}"
             );
     }
 

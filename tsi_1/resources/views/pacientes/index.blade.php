@@ -36,10 +36,10 @@
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title mb-2">Consulta de información</h5>
                     <p class="card-text flex-grow-1">
-                        Buscar un paciente por RUT y revisar todos sus datos registrados en el sistema.
+                        Buscar un paciente por RUN y revisar todos sus datos registrados en el sistema.
                     </p>
                     <a href="{{ route('pacientes.detalle') }}" class="btn btn-info text-white w-100 mt-auto">
-                        Ver detalle por RUT
+                        Ver detalle por RUN
                     </a>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title mb-2">Modificación de datos</h5>
                     <p class="card-text flex-grow-1">
-                        Buscar por RUT y actualizar nombre, contacto, previsión u otros datos del paciente.
+                        Buscar por RUN y actualizar nombre, contacto, previsión u otros datos del paciente.
                     </p>
                     <a href="{{ route('pacientes.actualizar') }}" class="btn btn-warning w-100 mt-auto">
                         Ir a actualizar
@@ -72,7 +72,7 @@
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title mb-2">Baja de registro</h5>
                     <p class="card-text flex-grow-1">
-                        Buscar por RUT y eliminar del sistema los registros de pacientes que ya no corresponda mantener.
+                        Buscar por RUN y eliminar del sistema los registros de pacientes que ya no corresponda mantener.
                     </p>
                     <a href="{{ route('pacientes.eliminar') }}" class="btn btn-danger w-100 mt-auto">
                         Ir a eliminar

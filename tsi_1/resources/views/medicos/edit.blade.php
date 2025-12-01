@@ -10,7 +10,7 @@
 
         {{-- RUT sólo para mostrar, NO editable --}}
         <div class="mb-3">
-            <label class="form-label">RUT</label>
+            <label class="form-label">RUN</label>
             <input type="text"
                    class="form-control"
                    value="{{ $medico->rutMedico }}"

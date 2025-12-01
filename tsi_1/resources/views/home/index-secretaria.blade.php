@@ -25,7 +25,7 @@
                     </p>
                     <ul class="small text-muted mb-3">
                         <li>Agregar / editar datos de pacientes</li>
-                        <li>Consultar detalle por RUT</li>
+                        <li>Consultar detalle por RUN</li>
                         <li>Eliminar registros cuando corresponda</li>
                     </ul>
                     <a href="{{ route('pacientes.index') }}" class="btn btn-primary mt-auto w-100">

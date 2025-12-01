@@ -41,10 +41,10 @@ class PacientesController extends Controller
             ],
             [
                 // RUT
-                'rutPaciente.required' => 'El RUT del paciente es obligatorio.',
-                'rutPaciente.unique'   => 'El RUT del paciente ya está registrado.',
-                'rutPaciente.max'      => 'El RUT del paciente no puede tener más de 9 caracteres.',
-                'rutPaciente.min'      => 'El RUT del paciente debe tener al menos 8 caracteres.',
+                'rutPaciente.required' => 'El RUN del paciente es obligatorio.',
+                'rutPaciente.unique'   => 'El RUN del paciente ya está registrado.',
+                'rutPaciente.max'      => 'El RUN del paciente no puede tener más de 9 caracteres.',
+                'rutPaciente.min'      => 'El RUN del paciente debe tener al menos 8 caracteres.',
 
 
                 // Nombre
@@ -223,10 +223,10 @@ class PacientesController extends Controller
             ],
             [
                 // RUT
-                'rutPaciente.required' => 'El RUT del paciente es obligatorio.',
-                'rutPaciente.unique'   => 'El RUT del paciente ya está registrado.',
-                'rutPaciente.max'      => 'El RUT del paciente no puede tener más de 9 caracteres.',
-                'rutPaciente.min'      => 'El RUT del paciente debe tener al menos 8 caracteres.',
+                'rutPaciente.required' => 'El RUN del paciente es obligatorio.',
+                'rutPaciente.unique'   => 'El RUN del paciente ya está registrado.',
+                'rutPaciente.max'      => 'El RUN del paciente no puede tener más de 9 caracteres.',
+                'rutPaciente.min'      => 'El RUN del paciente debe tener al menos 8 caracteres.',
 
                 // Nombre
                 'nombre.required'      => 'El nombre del paciente es obligatorio.',
@@ -260,7 +260,7 @@ class PacientesController extends Controller
         // Validar RUT con módulo 11
         if (!$this->validarRutChile($request->rutPaciente)) {
             return back()
-                ->withErrors(['rutPaciente' => 'El RUT ingresado no es válido.'])
+                ->withErrors(['rutPaciente' => 'El RUN ingresado no es válido.'])
                 ->withInput();
         }
 

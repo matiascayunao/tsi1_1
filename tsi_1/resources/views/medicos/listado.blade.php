@@ -20,7 +20,7 @@
                 <tr>
                     <th>Especialidad</th>
                     <th>Nombre</th>
-                    <th>RUT</th>
+                    <th>RUN</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
                     <th class="text-end">Acciones</th>

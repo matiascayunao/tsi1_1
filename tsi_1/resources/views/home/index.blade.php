@@ -43,10 +43,10 @@
                 </div>
                 <div class="card-body d-flex flex-column">
                     <p class="card-text">
-                        Cambia la fecha u hora de una cita ya reservada usando tu RUT.
+                        Cambia la fecha u hora de una cita ya reservada usando tu RUN.
                     </p>
                     <ul class="small text-muted mb-3">
-                        <li>Búsqueda rápida por RUT</li>
+                        <li>Búsqueda rápida por RUN</li>
                         <li>Reprogramación de horario</li>
                         <li>Actualización del motivo si es necesario</li>
                     </ul>
@@ -68,7 +68,7 @@
                         Si no podrás asistir, cancela tu cita para liberar el horario.
                     </p>
                     <ul class="small text-muted mb-3">
-                        <li>Ingreso de RUT del paciente</li>
+                        <li>Ingreso de RUN del paciente</li>
                         <li>Visualización de citas vigentes</li>
                         <li>Cancelación segura y registrada</li>
                     </ul>

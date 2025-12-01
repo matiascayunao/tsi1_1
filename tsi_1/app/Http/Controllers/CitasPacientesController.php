@@ -72,15 +72,15 @@ class CitasPacientesController extends Controller
             'motivoCita'  => 'required|string|max:255',
 
             ], [
-            'rutPaciente.exists' => 'El RUT del paciente no existe en el sistema.',
-            'rutPaciente.max'    => 'El RUT del paciente no puede tener más de 9 caracteres.',
-            'rutPaciente.min'    => 'El RUT del paciente debe tener al menos 8 caracteres.',
-            'rutMedico.exists'   => 'El RUT del médico no existe en el sistema.',
-            'rutMedico.max'      => 'El RUT del médico no puede tener más de 9 caracteres.',
-            'rutMedico.min'      => 'El RUT del médico debe tener al menos 8 caracteres.',
+            'rutPaciente.exists' => 'El RUN del paciente no existe en el sistema.',
+            'rutPaciente.max'    => 'El RUN del paciente no puede tener más de 9 caracteres.',
+            'rutPaciente.min'    => 'El RUN del paciente debe tener al menos 8 caracteres.',
+            'rutMedico.exists'   => 'El RUN del médico no existe en el sistema.',
+            'rutMedico.max'      => 'El RUN del médico no puede tener más de 9 caracteres.',
+            'rutMedico.min'      => 'El RUN del médico debe tener al menos 8 caracteres.',
 
-            'rutPaciente.required' => 'El RUT del paciente es obligatorio.',
-            'rutMedico.required'   => 'El RUT del médico es obligatorio.',
+            'rutPaciente.required' => 'El RUN del paciente es obligatorio.',
+            'rutMedico.required'   => 'El RUN del médico es obligatorio.',
             'fechaHora.required'   => 'La fecha y hora de la cita son obligatorias.',
             'motivoCita.required'  => 'El motivo de la cita es obligatorio.',
 
@@ -330,22 +330,22 @@ class CitasPacientesController extends Controller
             'rutMedico'        => 'required|string|max:9|min:8|',
 
             ], [
-            'rutPaciente.unique'     => 'El RUT ingresado ya está registrado.',
-            'rutPaciente.max'        => 'El RUT no puede tener más de 9 caracteres.',
-            'rutPaciente.min'        => 'El RUT debe tener al menos 8 caracteres.',
+            'rutPaciente.unique'     => 'El RUN ingresado ya está registrado.',
+            'rutPaciente.max'        => 'El RUN no puede tener más de 9 caracteres.',
+            'rutPaciente.min'        => 'El RUN debe tener al menos 8 caracteres.',
             'nombre.required'        => 'El nombre del paciente es obligatorio.',
             'fechaNacimiento.after_or_equal'  => 'La fecha de nacimiento no puede ser anterior a 1940.',
             'fechaNacimiento.before_or_equal' => 'La fecha de nacimiento no puede ser posterior a hoy.',
             'correo.email'           => 'Debes ingresar un correo electrónico válido.',
             'telefono.max'           => 'El teléfono no puede tener más de 9 caracteres.',
             'telefono.min'           => 'El teléfono debe tener al menos 8 caracteres.',
-            'rutMedico.max'          => 'El RUT del médico no puede tener más de 9 caracteres.',
-            'rutMedico.min'          => 'El RUT del médico debe tener al menos 8 caracteres.',
+            'rutMedico.max'          => 'El RUN del médico no puede tener más de 9 caracteres.',
+            'rutMedico.min'          => 'El RUN del médico debe tener al menos 8 caracteres.',
         ]);
 
         if (!$this->validarRut($request->rutPaciente)) {
             return back()
-                ->withErrors(['rutPaciente' => 'El RUT ingresado no es válido.'])
+                ->withErrors(['rutPaciente' => 'El RUN ingresado no es válido.'])
                 ->withInput();
         }
 
@@ -384,15 +384,15 @@ class CitasPacientesController extends Controller
         ],
         [
             // RUT paciente
-            'rutExistente.required' => 'El RUT del paciente es obligatorio.',
-            'rutExistente.max'      => 'El RUT del paciente no puede tener más de 9 caracteres.',
-            'rutExistente.min'      => 'El RUT del paciente debe tener al menos 8 caracteres.',
+            'rutExistente.required' => 'El RUN del paciente es obligatorio.',
+            'rutExistente.max'      => 'El RUN del paciente no puede tener más de 9 caracteres.',
+            'rutExistente.min'      => 'El RUN del paciente debe tener al menos 8 caracteres.',
 
             // RUT médico (oculto)
             'rutMedico.required'    => 'Falta el médico seleccionado en el paso anterior.',
             'rutMedico.exists'      => 'El médico seleccionado no existe en el sistema.',
-            'rutMedico.max'         => 'El RUT del médico no puede tener más de 9 caracteres.',
-            'rutMedico.min'         => 'El RUT del médico debe tener al menos 8 caracteres.',
+            'rutMedico.max'         => 'El RUN del médico no puede tener más de 9 caracteres.',
+            'rutMedico.min'         => 'El RUN del médico debe tener al menos 8 caracteres.',
         ]
     );
 
@@ -401,7 +401,7 @@ class CitasPacientesController extends Controller
     // Validación módulo 11
     if (!$this->validarRut($rut)) {
         return back()
-            ->withErrors(['rutExistente' => 'El RUT ingresado no es válido.'])
+            ->withErrors(['rutExistente' => 'El RUN ingresado no es válido.'])
             ->withInput();
     }
 
@@ -410,7 +410,7 @@ class CitasPacientesController extends Controller
     if (!$paciente) {
         return back()
             ->withErrors([
-                'rutExistente' => 'No se encontró un paciente con ese RUT. Puedes registrarlo en el formulario de la izquierda.',
+                'rutExistente' => 'No se encontró un paciente con ese RUN. Puedes registrarlo en el formulario de la izquierda.',
             ])
             ->withInput();
     }
@@ -441,7 +441,7 @@ class CitasPacientesController extends Controller
         // Validación de RUT (módulo 11)
         if (!$this->validarRut($rutPaciente)) {
             return back()
-                ->withErrors(['rutPaciente' => 'El RUT ingresado no es válido.'])
+                ->withErrors(['rutPaciente' => 'El RUN ingresado no es válido.'])
                 ->withInput();
         }
 
@@ -464,7 +464,7 @@ class CitasPacientesController extends Controller
         // Validación de RUT (módulo 11)
         if (!$this->validarRut($rut)) {
             return back()
-                ->withErrors(['rutPaciente' => 'El RUT ingresado no es válido.'])
+                ->withErrors(['rutPaciente' => 'El RUN ingresado no es válido.'])
                 ->withInput();
         }
 
@@ -594,14 +594,14 @@ class CitasPacientesController extends Controller
         'motivoCita'  => 'required|string|max:255',
 
         ], [
-        'rutPaciente.exists' => 'El RUT del paciente no existe en el sistema.',
-        'rutPaciente.max'    => 'El RUT del paciente no puede tener más de 9 caracteres.',
-        'rutPaciente.min'    => 'El RUT del paciente debe tener al menos 8 caracteres.',
-        'rutMedico.exists'   => 'El RUT del médico no existe en el sistema.',
-        'rutMedico.max'      => 'El RUT del médico no puede tener más de 9 caracteres.',
-        'rutMedico.min'      => 'El RUT del médico debe tener al menos 8 caracteres.',
-        'rutPaciente.required' => 'El RUT del paciente es obligatorio.',
-        'rutMedico.required'   => 'El RUT del médico es obligatorio.',
+        'rutPaciente.exists' => 'El RUN del paciente no existe en el sistema.',
+        'rutPaciente.max'    => 'El RUN del paciente no puede tener más de 9 caracteres.',
+        'rutPaciente.min'    => 'El RUN del paciente debe tener al menos 8 caracteres.',
+        'rutMedico.exists'   => 'El RUN del médico no existe en el sistema.',
+        'rutMedico.max'      => 'El RUN del médico no puede tener más de 9 caracteres.',
+        'rutMedico.min'      => 'El RUN del médico debe tener al menos 8 caracteres.',
+        'rutPaciente.required' => 'El RUN del paciente es obligatorio.',
+        'rutMedico.required'   => 'El RUN del médico es obligatorio.',
         'fechaHora.required'   => 'La fecha y hora de la cita son obligatorias.',
         'motivoCita.required'  => 'El motivo de la cita es obligatorio.',
         

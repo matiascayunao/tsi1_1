@@ -23,7 +23,7 @@
 
         {{-- RUT (si lo permites editar, se valida igual) --}}
         <div class="mb-3" >
-            <label class="form-label">RUT</label>
+            <label class="form-label">RUN</label>
             <input type="text" name="rutPaciente" class="form-control"
                    value="{{ old('rutPaciente', $paciente->rutPaciente) }}" disabled>
             @error('rutPaciente')
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const valor = rutInput.value.trim();
         if (!validarRutChile(valor)) {
             e.preventDefault();
-            alert('El RUT del paciente no es válido. Revísalo e inténtalo nuevamente.');
+            alert('El RUN del paciente no es válido. Revísalo e inténtalo nuevamente.');
             rutInput.focus();
         }
     });

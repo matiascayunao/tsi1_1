@@ -5,7 +5,7 @@
     <h2>Registro de Paciente</h2>
     <p class="text-muted">
         Si es primera vez que reserva, completa el formulario de la izquierda.
-        Si el paciente ya está registrado, usa el RUT en el recuadro verde.
+        Si el paciente ya está registrado, usa el RUN en el recuadro verde.
     </p>
 
     <div class="row">
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="rutPaciente" class="form-label">RUT</label>
+                            <label for="rutPaciente" class="form-label">RUN</label>
                             <input
                                 type="text"
                                 name="rutPaciente"
@@ -125,12 +125,12 @@
                         <input type="hidden" name="rutMedico" value="{{ $rutMedico }}">
 
                         <p class="small text-muted">
-                            Ingresa el RUT del paciente. Si existe en el sistema,
+                            Ingresa el RUN del paciente. Si existe en el sistema,
                             se usará su información (previsión incluida) y no se creará un registro nuevo.
                         </p>
 
                         <div class="mb-3">
-                            <label for="rutExistente" class="form-label">RUT</label>
+                            <label for="rutExistente" class="form-label">RUN</label>
                             <input
                                 type="text"
                                 name="rutExistente"

@@ -6,11 +6,11 @@
 
     @if($citas->isEmpty())
         <div class="alert alert-warning">
-            No se encontraron citas para el RUT <strong>{{ $rutPaciente }}</strong>.
+            No se encontraron citas para el RUN <strong>{{ $rutPaciente }}</strong>.
         </div>
     @else
         <p class="text-muted">
-            Mostrando citas asociadas al RUT <strong>{{ $rutPaciente }}</strong>.
+            Mostrando citas asociadas al RUN <strong>{{ $rutPaciente }}</strong>.
         </p>
 
         <table class="table table-bordered table-hover shadow-sm">

@@ -6,7 +6,7 @@
 
     <div class="card p-4 shadow-sm mb-3">
         <p><strong>Nombre:</strong> {{ $paciente->nombre }}</p>
-        <p><strong>RUT:</strong> {{ $paciente->rutPaciente }}</p>
+        <p><strong>RUN:</strong> {{ $paciente->rutPaciente }}</p>
         <p><strong>Fecha nacimiento:</strong> {{ $paciente->fechaNacimiento }}</p>
         <p><strong>Correo:</strong> {{ $paciente->correo }}</p>
         <p><strong>Teléfono:</strong> {{ $paciente->telefono }}</p>

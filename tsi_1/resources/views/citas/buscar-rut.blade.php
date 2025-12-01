@@ -7,7 +7,7 @@
           class="card p-4 shadow-sm" id="formModificarRut">
         @csrf
         <div class="mb-3">
-            <label for="rutPaciente" class="form-label">Ingrese RUT del Paciente</label>
+            <label for="rutPaciente" class="form-label">Ingrese RUN del Paciente</label>
             <input type="text"
                    name="rutPaciente"
                    id="rutPaciente"
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const valor = rutInput.value.trim();
         if (!validarRutChile(valor)) {
             e.preventDefault();
-            alert('El RUT ingresado no es válido. Revísalo e inténtalo nuevamente.');
+            alert('El RUN ingresado no es válido. Revísalo e inténtalo nuevamente.');
             rutInput.focus();
         }
     });
